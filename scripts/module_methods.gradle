@@ -1,0 +1,12 @@
+ext {
+
+    applyViewBinding = { module ->
+        module.configure(module) {
+            android {
+                buildFeatures {
+                    viewBinding true
+                }
+            }
+        }
+    }
+}
