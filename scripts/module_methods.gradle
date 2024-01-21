@@ -1,3 +1,6 @@
+apply from: "$project.rootDir/scripts/external_dependencies.gradle"
+apply from: "$project.rootDir/scripts/android_config.gradle"
+
 ext {
 
     applyViewBinding = { module ->

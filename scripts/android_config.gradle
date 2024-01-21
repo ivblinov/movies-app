@@ -1,0 +1,7 @@
+ext {
+    androidCompileSdkVersion = 34
+    androidMinSdkVersion = 26
+    androidTargetSdkVersion = 34
+    AppVersionName = "1.0"
+    AndroidVersionCode = 1
+}
