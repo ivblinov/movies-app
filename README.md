@@ -14,3 +14,11 @@
 - сеть - retrofit
 - реализация многопоточности и асинхронности - Coroutines, Flow
 - навигация - androidx-navigation, fragments и bottom navigation
+
+## Запуск проекта:
+
+1. Клонируйте проект командой:
+
+   git clone https://github.com/ivblinov/movies-app.git
+
+2. Запустите проект в AndroidStudio.
