@@ -1,0 +1,8 @@
+apply from: "$project.rootDir/scripts/module_methods.gradle"
+
+applyAndroidModuleSettings(this)
+applyKotlinWithoutKapt
+
+android {
+    namespace 'com.skillcinema.celebrity.core'
+}

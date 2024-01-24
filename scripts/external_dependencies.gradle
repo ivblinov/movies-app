@@ -13,4 +13,5 @@ ext {
     constraintlayoutDependency = "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     daggerDependency = "com.google.dagger:dagger:$daggerVersion"
     daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+    kotlinReflectDependency = "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 }
