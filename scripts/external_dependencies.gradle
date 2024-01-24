@@ -4,10 +4,13 @@ ext {
     appcompatVersion = '1.6.1'
     materialVersion = '1.11.0'
     constraintlayoutVersion = "2.0.2"
+    daggerVersion = '2.50'
 
     // dependencies
     coreDependency = "androidx.core:core-ktx:$coreKtxVersion"
     appcompatDependency = "androidx.appcompat:appcompat:$appcompatVersion"
     materialDependency = "com.google.android.material:material:$materialVersion"
     constraintlayoutDependency = "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    daggerDependency = "com.google.dagger:dagger:$daggerVersion"
+    daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
 }

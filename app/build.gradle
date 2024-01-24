@@ -1,12 +1,15 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 apply from: "$project.rootDir/scripts/module_methods.gradle"
 apply from: "$project.rootDir/scripts/android_config.gradle"
+apply from: "$project.rootDir/scripts/module_methods.gradle"
 
 applyViewBinding(this)
+applyDagger(this)
 
 android {
     namespace 'com.skillcinema.app'

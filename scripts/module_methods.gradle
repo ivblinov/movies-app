@@ -12,4 +12,11 @@ ext {
             }
         }
     }
+
+    applyDagger = { module ->
+        module.dependencies {
+            implementation daggerDependency
+            kapt daggerCompiler
+        }
+    }
 }
