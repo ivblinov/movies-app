@@ -1,0 +1,10 @@
+ext.isConstainsBuildFiles = { module ->
+    def buildGradleFiles = module.listFiles(new FilenameFilter() {
+
+        @Override
+        boolean accept(File dir, String name) {
+            return name.contains('build.gradle')
+        }
+    })
+    return buildGradleFiles.size() > 0
+}

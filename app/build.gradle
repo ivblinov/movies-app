@@ -6,7 +6,7 @@ plugins {
 
 apply from: "$project.rootDir/scripts/module_methods.gradle"
 apply from: "$project.rootDir/scripts/android_config.gradle"
-apply from: "$project.rootDir/scripts/module_methods.gradle"
+apply from: "$project.rootDir/scripts/common_methods.gradle"
 
 applyViewBinding(this)
 applyDagger(this)
@@ -45,4 +45,10 @@ dependencies {
     implementation appcompatDependency
     implementation materialDependency
     implementation constraintlayoutDependency
+
+    file("$project.rootDir/celebrity").listFiles().each { celebrityModule ->
+        if (celebrityModule.isDirectory() && isConstainsBuildFiles(celebrityModule)) {
+            implementation project(":celebrity:${celebrityModule.name}")
+        }
+    }
 }

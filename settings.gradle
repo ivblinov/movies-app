@@ -13,6 +13,14 @@ dependencyResolutionManagement {
     }
 }
 
+def includeModules = { type ->
+    file("$rootDir/$type").listFiles().each { module ->
+        include ":$type:${module.name}"
+        project(":$type:${module.name}").projectDir = new File(rootDir, "$type/${module.name}")
+    }
+}
+
 rootProject.name = "SkillCinema"
+
 include ':app'
-include ':celebrity:core'
+includeModules("celebrity")
