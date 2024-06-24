@@ -15,8 +15,8 @@ class MovieBlockTitleLayout @JvmOverloads constructor(
     var additionalTextClicked: (() -> Unit)? = null
 
     init {
-        val inflatedView = inflate(context, R.layout.movie_block_title_layout, this)
-        binding = MovieBlockTitleLayoutBinding.bind(inflatedView)
+        val view = inflate(context, R.layout.movie_block_title_layout, this)
+        binding = MovieBlockTitleLayoutBinding.bind(view)
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.MovieBlockTitleLayout)
         val mainText = typedArray.getString(R.styleable.MovieBlockTitleLayout_main_text)
