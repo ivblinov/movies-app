@@ -8,4 +8,7 @@
     <string name="title_profile">PROFILE</string>
     <string name="skillcinema">Skillcinema</string>
     <string name="arrow_right">Стрелка вправо</string>
+    <string name="premier">Премьеры</string>
+    <string name="everyone">Все</string>
+    <string name="rating">5.0</string>
 </resources>

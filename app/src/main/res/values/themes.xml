@@ -25,4 +25,20 @@
         <item name="android:textColor">@color/blue_bottom_nav</item>
         <item name="android:textSize">17sp</item>
     </style>
+
+    <style name="TextHomeImageViewTitle" parent="BaseTextStyle">
+        <item name="fontFamily">@font/graphik_regular</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextHomeImageViewGenre" parent="TextHomeImageViewTitle">
+        <item name="fontFamily">@font/graphik_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_home_genre</item>
+    </style>
+
+    <style name="cornerImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
 </resources>
