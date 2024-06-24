@@ -1,9 +1,28 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<resources>
     <style name="Base.Theme.MoviesApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/white</item>
     </style>
 
-    <style name="Theme.MoviesApp" parent="Base.Theme.MoviesApp" />
+    <style name="Theme.MoviesApp" parent="Base.Theme.MoviesApp">
+    </style>
+
+    <style name="Theme.ProgressBar" parent="Base.Theme.MoviesApp">
+        <item name="colorAccent">@color/blue_bottom_nav</item>
+    </style>
+
+    <style name="BaseTextStyle">
+        <item name="android:fontFamily">@font/graphik_medium</item>
+        <item name="android:textColor">@color/black_bottom_nav</item>
+    </style>
+
+    <style name="TextHomeTitle" parent="BaseTextStyle">
+        <item name="android:fontFamily">@font/graphik_semibold</item>
+        <item name="android:textSize">21sp</item>
+    </style>
+
+    <style name="TextHomeAll" parent="BaseTextStyle">
+        <item name="android:textColor">@color/blue_bottom_nav</item>
+        <item name="android:textSize">17sp</item>
+    </style>
 </resources>

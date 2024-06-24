@@ -51,6 +51,9 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.navigation.ui)
 
+    // RecyclerView:
+    implementation(libs.androidx.recyclerview)
+
     // Tests:
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
