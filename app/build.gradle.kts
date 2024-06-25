@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -53,6 +54,14 @@ dependencies {
 
     // RecyclerView:
     implementation(libs.androidx.recyclerview)
+
+    // Retrofit:
+    implementation(libs.retrofit)
+
+    // Moshi:
+    implementation(libs.moshi)
+    implementation(libs.moshi.converter)
+    ksp(libs.moshi.kotlin.codegen)
 
     // Tests:
     testImplementation(libs.junit)
