@@ -1,12 +1,13 @@
 package com.examples.moviesapp.domain
 
 import com.examples.moviesapp.data.Repository
-import com.examples.moviesapp.data.models_dto.MovieListDto
+import com.examples.moviesapp.entities.MovieList
+import javax.inject.Inject
 
-class LoadPremiereListUseCase(
+class LoadPremiereListUseCase @Inject constructor (
     private val repository: Repository
 ) {
-    suspend fun loadPremiereList(): MovieListDto {
+    suspend fun loadPremiereList(): MovieList {
         return repository.loadPremiereList()
     }
 }
