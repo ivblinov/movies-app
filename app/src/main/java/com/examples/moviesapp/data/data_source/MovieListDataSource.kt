@@ -7,7 +7,6 @@ import javax.inject.Inject
 class MovieListDataSource @Inject constructor(
     private val kinoService: KinoService
 ) {
-
     suspend fun loadPremiereList(): MovieListDto {
         return kinoService.getPremieres()
     }

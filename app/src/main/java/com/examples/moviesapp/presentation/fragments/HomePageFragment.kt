@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.examples.moviesapp.app.MovieApplication
 import com.examples.moviesapp.databinding.FragmentHomePageBinding
+import com.examples.moviesapp.di.DaggerAppComponent
+import com.examples.moviesapp.domain.LoadPremiereListUseCase
 import com.examples.moviesapp.presentation.states.HomePageState
 import com.examples.moviesapp.presentation.viewmodels.HomePageViewModel
 import kotlinx.coroutines.launch
