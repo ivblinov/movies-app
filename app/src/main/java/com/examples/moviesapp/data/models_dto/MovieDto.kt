@@ -14,8 +14,8 @@ data class MovieDto(
     @Json(name = "year") override val year: Int,
     @Json(name = "posterUrl") override val posterUrl: String,
     @Json(name = "posterUrlPreview") override val posterUrlPreview: String,
-    @Json(name = "countries") override val countries: List<Country>,
-    @Json(name = "genres") override val genres: List<Genre>,
+    @Json(name = "countries") override val countries: List<CountryDto>,
+    @Json(name = "genres") override val genres: List<GenreDto>,
     @Json(name = "duration") override val duration: Int?,
     @Json(name = "premiereRu") override val premiereRu: String
 ) : Movie

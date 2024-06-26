@@ -8,5 +8,5 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class MovieListDto(
     @Json(name = "total") override val total: Int,
-    @Json(name = "items") override val items: List<Movie>
+    @Json(name = "items") override val items: List<MovieDto>
 ) : MovieList

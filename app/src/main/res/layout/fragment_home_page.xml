@@ -22,6 +22,7 @@
             android:contentDescription="@string/skillcinema"
             android:src="@drawable/skillcinema_title" />
 
+        <!-- premieres-->
         <com.examples.moviesapp.presentation.custom_layouts.MovieBlockLayout
             android:id="@+id/movie_block"
             android:layout_width="match_parent"

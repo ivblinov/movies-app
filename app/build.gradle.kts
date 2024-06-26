@@ -63,6 +63,10 @@ dependencies {
     implementation(libs.moshi.converter)
     ksp(libs.moshi.kotlin.codegen)
 
+    // ViewModel:
+    implementation(libs.androidx.viewmodel)
+    implementation(libs.androidx.fragment.ktx)
+
     // Tests:
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

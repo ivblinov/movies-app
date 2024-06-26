@@ -1,5 +1,6 @@
 package com.examples.moviesapp.data.api
 
+import com.examples.moviesapp.data.models_dto.MovieListDto
 import com.examples.moviesapp.entities.MovieList
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -12,7 +13,7 @@ interface KinoApi {
     @Headers("X-API-KEY: $API_KEY")
     @GET("/api/v2.2/films/premieres")
     suspend fun getPremieres(
-        @Query("year") year: Int,
-        @Query("month") month: String
-    ) : MovieList
+        @Query("year") year: Int = 2024,
+        @Query("month") month: String = "JUNE"
+    ) : MovieListDto
 }

@@ -17,4 +17,8 @@ class MovieBlockLayout @JvmOverloads constructor(
         val view = inflate(context, R.layout.movie_block_layout, this)
         binding = MovieBlockLayoutBinding.bind(view)
     }
+
+    fun setMainText(text: String) {
+        binding.movieBlockTitle.setMainText(text)
+    }
 }

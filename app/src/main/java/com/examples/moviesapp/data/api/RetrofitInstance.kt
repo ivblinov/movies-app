@@ -3,7 +3,7 @@ package com.examples.moviesapp.data.api
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-private const val BASE_URL = "https://kinopoiskapiunofficial.tech"
+private const val BASE_URL = "https://kinopoiskapiunofficial.tech/"
 
 object RetrofitInstance {
     private val retrofit = Retrofit.Builder()
