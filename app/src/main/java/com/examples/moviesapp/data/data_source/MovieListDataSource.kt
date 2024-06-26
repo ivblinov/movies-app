@@ -1,12 +1,14 @@
 package com.examples.moviesapp.data.data_source
 
-import com.examples.moviesapp.data.api.RetrofitInstance
+import com.examples.moviesapp.data.api.KinoService
 import com.examples.moviesapp.data.models_dto.MovieListDto
 import javax.inject.Inject
 
-class MovieListDataSource @Inject constructor() {
+class MovieListDataSource @Inject constructor(
+    private val kinoService: KinoService
+) {
 
     suspend fun loadPremiereList(): MovieListDto {
-        return RetrofitInstance.kinoApi.getPremieres()
+        return kinoService.getPremieres()
     }
 }

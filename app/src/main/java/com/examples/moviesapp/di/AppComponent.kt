@@ -1,10 +1,16 @@
 package com.examples.moviesapp.di
 
-import com.examples.moviesapp.presentation.viewmodels.HomePageViewModel
+import com.examples.moviesapp.presentation.fragments.HomePageFragment
 import dagger.Component
+import javax.inject.Singleton
 
-@Component
+@Singleton
+@Component(
+    modules = [
+        NetworkModule::class
+    ]
+)
 interface AppComponent {
 
-    fun homePageViewModel(): HomePageViewModel
+    fun inject(fragment: HomePageFragment)
 }
