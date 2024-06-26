@@ -6,33 +6,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.examples.moviesapp.data.Repository
-import com.examples.moviesapp.data.api.RetrofitInstance
-import com.examples.moviesapp.data.data_source.MovieListDataSource
+import com.examples.moviesapp.app.MovieApplication
 import com.examples.moviesapp.databinding.FragmentHomePageBinding
 import com.examples.moviesapp.di.DaggerAppComponent
 import com.examples.moviesapp.domain.LoadPremiereListUseCase
 import com.examples.moviesapp.presentation.states.HomePageState
 import com.examples.moviesapp.presentation.viewmodels.HomePageViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val TAG = "MyLog"
 class HomePageFragment : Fragment() {
 
     private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
-
-//    private val viewModel: HomePageViewModel by viewModels()
-    private val viewModel = DaggerAppComponent.create().homePageViewModel()
+    @Inject lateinit var viewModel: HomePageViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity?.applicationContext as MovieApplication).appComponent.inject(this)
         _binding = FragmentHomePageBinding.inflate(inflater, container, false)
         return binding.root
     }
