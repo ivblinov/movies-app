@@ -2,17 +2,16 @@ package com.examples.moviesapp.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.examples.moviesapp.data.Repository
-import com.examples.moviesapp.data.api.RetrofitInstance
 import com.examples.moviesapp.domain.LoadPremiereListUseCase
 import com.examples.moviesapp.entities.MovieList
 import com.examples.moviesapp.presentation.states.HomePageState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val TAG = "MyLog"
-class HomePageViewModel(
+class HomePageViewModel @Inject constructor(
     private val loadPremiereListUseCase: LoadPremiereListUseCase
 ) : ViewModel() {
 

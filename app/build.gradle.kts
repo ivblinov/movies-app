@@ -48,6 +48,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    // Dagger:
+    implementation (libs.dagger)
+    ksp (libs.dagger.compiler)
+
     // Navigation:
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.navigation.ui)
