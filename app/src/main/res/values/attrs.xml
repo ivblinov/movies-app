@@ -4,4 +4,9 @@
         <attr name="main_text" format="string" />
         <attr name="additional_text" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="MovieBlockLayout">
+        <attr name="block_main_text" format="string" />
+        <attr name="block_additional_text" format="string" />
+    </declare-styleable>
 </resources>
