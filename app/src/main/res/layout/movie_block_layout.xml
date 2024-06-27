@@ -8,9 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="29dp"
-        app:additional_text="@string/everyone"
-        app:main_text="@string/premier" />
+        android:layout_marginBottom="29dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"

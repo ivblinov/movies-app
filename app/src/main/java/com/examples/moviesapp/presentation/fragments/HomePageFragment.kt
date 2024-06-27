@@ -1,7 +1,6 @@
 package com.examples.moviesapp.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,19 +10,22 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.examples.moviesapp.app.MovieApplication
 import com.examples.moviesapp.databinding.FragmentHomePageBinding
+import com.examples.moviesapp.presentation.recyclers.adapters.CollectionsAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
+import com.examples.moviesapp.presentation.states.AllButtonState
 import com.examples.moviesapp.presentation.states.HomePageState
 import com.examples.moviesapp.presentation.viewmodels.HomePageViewModel
+import com.examples.moviesapp.setVisible
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "MyLog"
 class HomePageFragment : Fragment() {
 
     private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
     @Inject lateinit var viewModel: HomePageViewModel
     @Inject lateinit var adapter: MovieAdapter
+    @Inject lateinit var popularAdapter: CollectionsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,19 +39,46 @@ class HomePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.movieBlock.setAdapter(adapter)
+        binding.premieresBlock.setAdapter(adapter)
+        binding.popularBlock.setAdapter(popularAdapter)
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-
-                viewModel.state.collect { state ->
-                    when(state) {
-                        HomePageState.Loading -> {
-
+                launch {
+                    viewModel.premiereState.collect { state ->
+                        when(state) {
+                            HomePageState.Success -> {
+                                viewModel.premiereList?.items?.let { adapter.setData(it) }
+                            }
+                            HomePageState.Loading -> { }
                         }
-                        HomePageState.Success -> {
-                            Log.d(TAG, "movieList = ${viewModel.movieList?.items}")
-                            viewModel.movieList?.items?.let { adapter.setData(it) }
+                    }
+                }
+                launch {
+                    viewModel.allPremiereState.collect { premiereState ->
+                        when(premiereState) {
+                            AllButtonState.Visible ->
+                                setVisible(binding.premieresBlock.additionalText)
+                            else -> { }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.popularState.collect { state ->
+                        when(state) {
+                            HomePageState.Loading -> { }
+                            HomePageState.Success -> {
+                                viewModel.popularFilms?.items?.let { popularAdapter.setData(it) }
+                            }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.allPopularState.collect { popularState ->
+                        when(popularState) {
+                            AllButtonState.Visible ->
+                                setVisible(binding.popularBlock.additionalText)
+                            else -> { }
                         }
                     }
                 }

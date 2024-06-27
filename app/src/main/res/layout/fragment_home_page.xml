@@ -24,12 +24,21 @@
 
         <!-- premieres-->
         <com.examples.moviesapp.presentation.custom_layouts.MovieBlockLayout
-            android:id="@+id/movie_block"
+            android:id="@+id/premieres_block"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="57dp"
-            app:additional_text="@string/everyone"
-            app:main_text="@string/premier" />
+            app:block_additional_text="@string/everyone"
+            app:block_main_text="@string/premier" />
+
+        <!-- popular-->
+        <com.examples.moviesapp.presentation.custom_layouts.MovieBlockLayout
+            android:id="@+id/popular_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="57dp"
+            app:block_additional_text="@string/everyone"
+            app:block_main_text="@string/popular" />
 
     </LinearLayout>
 </ScrollView>
