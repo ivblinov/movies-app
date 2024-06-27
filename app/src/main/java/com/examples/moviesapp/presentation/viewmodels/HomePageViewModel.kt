@@ -24,7 +24,7 @@ class HomePageViewModel @Inject constructor(
         loadPremiere()
     }
 
-    fun loadPremiere() {
+    private fun loadPremiere() {
         viewModelScope.launch {
             _state.value = HomePageState.Loading
             movieList = loadPremiereListUseCase.loadPremiereList()

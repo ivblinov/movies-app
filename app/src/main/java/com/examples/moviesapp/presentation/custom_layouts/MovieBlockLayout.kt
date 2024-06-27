@@ -3,8 +3,10 @@ package com.examples.moviesapp.presentation.custom_layouts
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.examples.moviesapp.R
 import com.examples.moviesapp.databinding.MovieBlockLayoutBinding
+import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
 
 class MovieBlockLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -20,5 +22,9 @@ class MovieBlockLayout @JvmOverloads constructor(
 
     fun setMainText(text: String) {
         binding.movieBlockTitle.setMainText(text)
+    }
+
+    fun setAdapter(adapter: MovieAdapter) {
+        binding.recycler.adapter = adapter
     }
 }

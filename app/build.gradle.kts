@@ -52,6 +52,9 @@ dependencies {
     implementation (libs.dagger)
     ksp (libs.dagger.compiler)
 
+    // Glide:
+    implementation(libs.glide)
+
     // Navigation:
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.navigation.ui)

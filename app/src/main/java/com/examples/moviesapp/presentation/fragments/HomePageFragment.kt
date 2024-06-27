@@ -11,8 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.examples.moviesapp.app.MovieApplication
 import com.examples.moviesapp.databinding.FragmentHomePageBinding
-import com.examples.moviesapp.di.DaggerAppComponent
-import com.examples.moviesapp.domain.LoadPremiereListUseCase
+import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
 import com.examples.moviesapp.presentation.states.HomePageState
 import com.examples.moviesapp.presentation.viewmodels.HomePageViewModel
 import kotlinx.coroutines.launch
@@ -24,6 +23,7 @@ class HomePageFragment : Fragment() {
     private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
     @Inject lateinit var viewModel: HomePageViewModel
+    @Inject lateinit var adapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +37,8 @@ class HomePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.movieBlock.setAdapter(adapter)
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
 
@@ -47,6 +49,7 @@ class HomePageFragment : Fragment() {
                         }
                         HomePageState.Success -> {
                             Log.d(TAG, "movieList = ${viewModel.movieList?.items}")
+                            viewModel.movieList?.items?.let { adapter.setData(it) }
                         }
                     }
                 }
