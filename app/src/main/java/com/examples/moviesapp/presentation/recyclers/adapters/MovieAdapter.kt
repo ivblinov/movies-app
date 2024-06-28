@@ -28,7 +28,7 @@ class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.Mov
         val item = data.getOrNull(position)
         with(holder.binding) {
             title.text = item?.nameRu ?: ""
-            genre.text= item?.genres?.joinToString(", ") { it.genre }
+            genre.text = item?.genres?.firstOrNull()?.genre
             item?.let {
                 Glide
                     .with(poster.context)
@@ -38,7 +38,8 @@ class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.Mov
         }
     }
 
-    inner class MovieViewHolder(val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class MovieViewHolder(val binding: MovieItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     fun setData(data: List<Movie>) {
         this.data.addAll(data)

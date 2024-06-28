@@ -18,7 +18,7 @@ class RatingView @JvmOverloads constructor(
         addView(binding.root)
     }
 
-    private fun setText(text: String) {
+    fun setText(text: String) {
         binding.textRating.text = text
     }
 }

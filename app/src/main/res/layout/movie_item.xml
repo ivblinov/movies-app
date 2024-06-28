@@ -13,7 +13,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/poster"
         android:layout_width="match_parent"
-        android:layout_height="188dp"
+        android:layout_height="178dp"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +24,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
+        style="@style/TextHomeImageViewTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textAppearance="@style/TextHomeImageViewTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/poster"
@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="7dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
