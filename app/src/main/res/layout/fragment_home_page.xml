@@ -18,7 +18,7 @@
             android:id="@+id/title_skillcinema"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="66dp"
+            android:layout_marginTop="62dp"
             android:contentDescription="@string/skillcinema"
             android:src="@drawable/skillcinema_title" />
 
@@ -27,7 +27,7 @@
             android:id="@+id/premieres_block"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="57dp"
+            android:layout_marginTop="48dp"
             app:block_additional_text="@string/everyone"
             app:block_main_text="@string/premier" />
 
@@ -36,7 +36,7 @@
             android:id="@+id/popular_block"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="57dp"
+            android:layout_marginTop="35dp"
             app:block_additional_text="@string/everyone"
             app:block_main_text="@string/popular" />
 
