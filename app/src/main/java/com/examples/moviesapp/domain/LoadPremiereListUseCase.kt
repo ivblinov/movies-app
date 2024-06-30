@@ -5,6 +5,7 @@ import com.examples.moviesapp.domain.models.MovieListModel
 import com.examples.moviesapp.entities.MovieList
 import com.examples.moviesapp.getDaysList
 import com.examples.moviesapp.getSetPairMonthYear
+import com.examples.moviesapp.shuffleList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,8 +28,8 @@ class LoadPremiereListUseCase @Inject constructor(
 
     suspend fun getPremiereList(): MovieList? {
         val movieList = launchLoadingPremiere(setPairMonthYear)
-        val movie = sortedMovieList(movieList)
-        return movie
+        val movie = filterMovieList(movieList)
+        return shuffleList(movie)
     }
 
     private suspend fun launchLoadingPremiere(
@@ -51,7 +52,7 @@ class LoadPremiereListUseCase @Inject constructor(
         return movieList
     }
 
-    private fun sortedMovieList(movieList: MovieListModel?): MovieListModel? {
+    private fun filterMovieList(movieList: MovieListModel?): MovieListModel? {
         return if (movieList != null) {
             val movie = movieList.items.filter {
                 it.premiereRu in daysListToString
