@@ -13,8 +13,8 @@ interface KinoService {
     @Headers("X-API-KEY: $API_KEY")
     @GET("/api/v2.2/films/premieres")
     suspend fun getPremieres(
-        @Query("year") year: Int = 2024,
-        @Query("month") month: String = "JUNE"
+        @Query("year") year: Int,
+        @Query("month") month: String
     ) : MovieListDto
 
     @Headers("X-API-KEY: $API_KEY")

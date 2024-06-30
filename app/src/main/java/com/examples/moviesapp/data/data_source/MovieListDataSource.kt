@@ -7,7 +7,7 @@ import javax.inject.Inject
 class MovieListDataSource @Inject constructor(
     private val kinoService: KinoService
 ) {
-    suspend fun loadPremiereList(): MovieListDto {
-        return kinoService.getPremieres()
+    suspend fun loadPremiereList(year: Int, month: String): MovieListDto {
+        return kinoService.getPremieres(year, month)
     }
 }

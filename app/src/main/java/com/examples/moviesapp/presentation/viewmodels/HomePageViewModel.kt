@@ -41,7 +41,7 @@ class HomePageViewModel @Inject constructor(
     private fun loadPremiere() {
         viewModelScope.launch {
             _premiereState.value = HomePageState.Loading
-            premiereList = loadPremiereListUseCase.loadPremiereList()
+            premiereList = loadPremiereListUseCase.getPremiereList()
             premiereList?.let { checkMovieListSize(_allPremiereState, it.total) }
             _premiereState.value = HomePageState.Success
         }
