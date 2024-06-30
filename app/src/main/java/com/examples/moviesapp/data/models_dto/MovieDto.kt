@@ -1,7 +1,5 @@
 package com.examples.moviesapp.data.models_dto
 
-import com.examples.moviesapp.entities.Country
-import com.examples.moviesapp.entities.Genre
 import com.examples.moviesapp.entities.Movie
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

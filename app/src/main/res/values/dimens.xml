@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    margin-->
+    <dimen name="margin_start_home_page">30dp</dimen>
+
+    <dimen name="margin_top_title_skillcinema">62dp</dimen>
+    <dimen name="margin_top_premieres_block">48dp</dimen>
+    <dimen name="margin_top_movie_block">35dp</dimen>
+
+    <dimen name="margin_end_home_page">30dp</dimen>
+
+    <!--    padding-->
+    <dimen name="padding_start_recycler_premiere">30dp</dimen>
+</resources>

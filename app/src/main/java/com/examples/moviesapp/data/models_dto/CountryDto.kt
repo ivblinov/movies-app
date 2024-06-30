@@ -5,6 +5,6 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-class CountryDto(
+data class CountryDto(
     @Json(name = "country") override val country: String
 ) : Country

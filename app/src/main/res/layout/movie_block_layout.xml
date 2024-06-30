@@ -7,13 +7,16 @@
         android:id="@+id/movie_block_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="@dimen/margin_start_home_page"
+        android:layout_marginEnd="@dimen/margin_end_home_page"
         android:layout_marginBottom="27dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_start_recycler_premiere"
+        android:clipToPadding="false"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/movie_item" />
