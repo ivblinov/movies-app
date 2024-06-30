@@ -2,6 +2,7 @@ package com.examples.moviesapp
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
+import com.examples.moviesapp.domain.models.MovieListModel
 import java.time.LocalDate
 
 fun setVisible(additionalText: AppCompatTextView?) {
@@ -29,4 +30,14 @@ fun getDaysList(amountOfDays: Byte): MutableList<LocalDate> {
         daysList.add(date)
     }
     return daysList
+}
+
+fun shuffleList(list: MovieListModel?): MovieListModel? {
+    val newMovieListModel = list?.let {
+        MovieListModel(
+        total = it.total,
+        items = it.items.shuffled()
+        )
+    }
+    return newMovieListModel
 }
