@@ -20,6 +20,7 @@ class HomePageViewModel @Inject constructor(
 
     var premiereList: MovieList? = null
     var popularFilms: Collections? = null
+    var top250Films: Collections? = null
 
     private val _premiereState = MutableStateFlow<HomePageState>(HomePageState.Success)
     val premiereState = _premiereState.asStateFlow()
@@ -33,9 +34,16 @@ class HomePageViewModel @Inject constructor(
     private val _allPopularState = MutableStateFlow<AllButtonState>(AllButtonState.Gone)
     val allPopularState = _allPopularState.asStateFlow()
 
+    private val _top250State = MutableStateFlow<HomePageState>(HomePageState.Success)
+    val top250State = _top250State.asStateFlow()
+
+    private val _allTop250State = MutableStateFlow<AllButtonState>(AllButtonState.Gone)
+    val allTop250State = _allTop250State.asStateFlow()
+
     init {
         loadPremiere()
         loadPopular()
+        loadTop250()
     }
 
     private fun loadPremiere() {
@@ -53,6 +61,15 @@ class HomePageViewModel @Inject constructor(
             popularFilms = loadCollectionsUseCase.loadPopularMovies()
             popularFilms?.let { checkMovieListSize(_allPopularState, it.total) }
             _popularState.value = HomePageState.Success
+        }
+    }
+
+    private fun loadTop250() {
+        viewModelScope.launch {
+            _top250State.value = HomePageState.Loading
+            top250Films = loadCollectionsUseCase.loadTop250Movies()
+            top250Films?.let { checkMovieListSize(_allTop250State, it.total) }
+            _top250State.value = HomePageState.Success
         }
     }
 
