@@ -55,7 +55,7 @@ class LoadPremiereListUseCase @Inject constructor(
     private fun filterMovieList(movieList: MovieListModel?): MovieListModel? {
         return if (movieList != null) {
             val movie = movieList.items.filter {
-                it.premiereRu in daysListToString
+                it.premiereRu in daysListToString && it.nameRu != ""
             }
             movieList.total = movie.size
             movieList.items = movie

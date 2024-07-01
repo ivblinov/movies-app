@@ -1,6 +1,5 @@
 package com.examples.moviesapp.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.examples.moviesapp.domain.LoadCollectionsUseCase
@@ -51,7 +50,7 @@ class HomePageViewModel @Inject constructor(
     private fun loadPopular() {
         viewModelScope.launch {
             _popularState.value = HomePageState.Loading
-            popularFilms = loadCollectionsUseCase.loadCollections()
+            popularFilms = loadCollectionsUseCase.loadPopularMovies()
             popularFilms?.let { checkMovieListSize(_allPopularState, it.total) }
             _popularState.value = HomePageState.Success
         }

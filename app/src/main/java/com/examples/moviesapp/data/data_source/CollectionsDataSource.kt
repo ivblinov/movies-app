@@ -7,7 +7,7 @@ import javax.inject.Inject
 class CollectionsDataSource @Inject constructor(
     private val kinoService: KinoService
 ) {
-    suspend fun loadCollections(): CollectionsDto {
-        return kinoService.getPopular()
+    suspend fun loadCollections(type: String, page: Int): CollectionsDto {
+        return kinoService.getPopular(type, page)
     }
 }
