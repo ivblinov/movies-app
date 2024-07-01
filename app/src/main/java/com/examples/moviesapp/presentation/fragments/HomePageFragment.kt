@@ -26,6 +26,7 @@ class HomePageFragment : Fragment() {
     @Inject lateinit var viewModel: HomePageViewModel
     @Inject lateinit var adapter: MovieAdapter
     @Inject lateinit var popularAdapter: CollectionsAdapter
+    @Inject lateinit var top250Adapter: CollectionsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +42,7 @@ class HomePageFragment : Fragment() {
 
         binding.premieresBlock.setAdapter(adapter)
         binding.popularBlock.setAdapter(popularAdapter)
+        binding.top250Block.setAdapter(top250Adapter)
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
@@ -78,6 +80,24 @@ class HomePageFragment : Fragment() {
                         when(popularState) {
                             AllButtonState.Visible ->
                                 setVisible(binding.popularBlock.additionalText)
+                            else -> { }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.top250State.collect { state ->
+                        when(state) {
+                            HomePageState.Loading -> { }
+                            HomePageState.Success -> {
+                                viewModel.top250Films?.items?.let { top250Adapter.setData(it) }
+                            }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.allTop250State.collect { top250State ->
+                        when(top250State) {
+                            AllButtonState.Visible -> setVisible(binding.top250Block.additionalText)
                             else -> { }
                         }
                     }
