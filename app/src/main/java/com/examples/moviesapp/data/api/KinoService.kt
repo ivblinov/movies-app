@@ -20,7 +20,7 @@ interface KinoService {
     @Headers("X-API-KEY: $API_KEY")
     @GET("/api/v2.2/films/collections")
     suspend fun getPopular(
-        @Query("type") type: String = "TOP_POPULAR_MOVIES",
-        @Query("page") page: Int = 1
+        @Query("type") type: String,
+        @Query("page") page: Int
     ) : CollectionsDto
 }

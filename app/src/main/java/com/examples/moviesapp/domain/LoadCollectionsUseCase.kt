@@ -1,13 +1,24 @@
 package com.examples.moviesapp.domain
 
 import com.examples.moviesapp.data.Repository
-import com.examples.moviesapp.entities.Collections
+import com.examples.moviesapp.domain.models.CollectionsModel
+import com.examples.moviesapp.shuffleList
 import javax.inject.Inject
 
 class LoadCollectionsUseCase @Inject constructor(
     private val repository: Repository
 ) {
-    suspend fun loadCollections(): Collections {
-        return repository.loadCollections()
+    private val typePopularMovies = "TOP_POPULAR_MOVIES"
+    private val typeTop250Movies = "TOP_250_MOVIES"
+    private val page = 1
+
+    suspend fun loadPopularMovies(): CollectionsModel? {
+        val popularMovies = repository.loadCollections(typePopularMovies, page)
+        return shuffleList(popularMovies)
+    }
+
+    suspend fun loadTop250Movies(): CollectionsModel? {
+        val top250Movies = repository.loadCollections(typeTop250Movies, page)
+        return shuffleList(top250Movies)
     }
 }
