@@ -13,4 +13,5 @@
     <string name="rating">5.0</string>
     <string name="popular">Популярное</string>
     <string name="top_250">Топ-250</string>
+    <string name="dynamic_selection">Динамическая подборка</string>
 </resources>
