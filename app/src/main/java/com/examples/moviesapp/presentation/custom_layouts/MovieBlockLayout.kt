@@ -15,12 +15,14 @@ class MovieBlockLayout @JvmOverloads constructor(
 
     private val binding: MovieBlockLayoutBinding
     var additionalText: AppCompatTextView? = null
+    var mainText: AppCompatTextView? = null
 
     init {
         orientation = VERTICAL
         val view = inflate(context, R.layout.movie_block_layout, this)
         binding = MovieBlockLayoutBinding.bind(view)
 
+        mainText = binding.movieBlockTitle.mainText
         additionalText = binding.movieBlockTitle.additionalText
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.MovieBlockLayout)

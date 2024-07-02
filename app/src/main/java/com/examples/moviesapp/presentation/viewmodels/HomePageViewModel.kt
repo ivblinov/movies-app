@@ -3,8 +3,11 @@ package com.examples.moviesapp.presentation.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.examples.moviesapp.domain.LoadCollectionsUseCase
+import com.examples.moviesapp.domain.LoadDynamicSelectionUseCase
 import com.examples.moviesapp.domain.LoadPremiereListUseCase
 import com.examples.moviesapp.entities.Collections
+import com.examples.moviesapp.entities.FilmList
+import com.examples.moviesapp.entities.FilmListFull
 import com.examples.moviesapp.entities.MovieList
 import com.examples.moviesapp.presentation.states.AllButtonState
 import com.examples.moviesapp.presentation.states.HomePageState
@@ -15,12 +18,14 @@ import javax.inject.Inject
 
 class HomePageViewModel @Inject constructor(
     private val loadPremiereListUseCase: LoadPremiereListUseCase,
-    private val loadCollectionsUseCase: LoadCollectionsUseCase
+    private val loadCollectionsUseCase: LoadCollectionsUseCase,
+    private val loadDynamicSelectionUseCase: LoadDynamicSelectionUseCase
 ) : ViewModel() {
 
     var premiereList: MovieList? = null
     var popularFilms: Collections? = null
     var top250Films: Collections? = null
+    var dynamicSelectionFilms: FilmListFull? = null
 
     private val _premiereState = MutableStateFlow<HomePageState>(HomePageState.Success)
     val premiereState = _premiereState.asStateFlow()
@@ -40,10 +45,17 @@ class HomePageViewModel @Inject constructor(
     private val _allTop250State = MutableStateFlow<AllButtonState>(AllButtonState.Gone)
     val allTop250State = _allTop250State.asStateFlow()
 
+    private val _dynamicSelectionState = MutableStateFlow<HomePageState>(HomePageState.Success)
+    val dynamicSelectionState = _dynamicSelectionState.asStateFlow()
+
+    private val _allDynamicSelectionState = MutableStateFlow<AllButtonState>(AllButtonState.Gone)
+    val allDynamicSelectionState = _allDynamicSelectionState.asStateFlow()
+
     init {
         loadPremiere()
         loadPopular()
         loadTop250()
+        loadDynamicSelection()
     }
 
     private fun loadPremiere() {
@@ -73,11 +85,20 @@ class HomePageViewModel @Inject constructor(
         }
     }
 
+    private fun loadDynamicSelection() {
+        viewModelScope.launch {
+            _dynamicSelectionState.value = HomePageState.Loading
+            dynamicSelectionFilms = loadDynamicSelectionUseCase.loadDynamicSelectionFilms()
+            dynamicSelectionFilms?.let { checkMovieListSize(_allDynamicSelectionState, it.total) }
+            _dynamicSelectionState.value = HomePageState.Success
+        }
+    }
+
     fun checkMovieListSize(
         state: MutableStateFlow<AllButtonState>,
-        listSize: Int, size: Int = 20
+        listSize: Int?, size: Int = 20
     ) {
-        if (listSize > size) {
+        if (listSize != null && listSize > size) {
             state.value = AllButtonState.Visible
         }
     }

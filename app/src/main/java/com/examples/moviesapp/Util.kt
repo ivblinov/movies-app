@@ -3,6 +3,7 @@ package com.examples.moviesapp
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.examples.moviesapp.domain.models.CollectionsModel
+import com.examples.moviesapp.domain.models.FilmListModel
 import com.examples.moviesapp.domain.models.MovieListModel
 import java.time.LocalDate
 
@@ -52,4 +53,15 @@ fun shuffleList(list: CollectionsModel?): CollectionsModel? {
         )
     }
     return newCollectionsModel
+}
+
+fun shuffleList(list: FilmListModel?): FilmListModel? {
+    val newFilmListModel = list?.let {
+        FilmListModel(
+            total = it.total,
+            totalPages = it.totalPages,
+            items = it.items.shuffled(),
+        )
+    }
+    return newFilmListModel
 }

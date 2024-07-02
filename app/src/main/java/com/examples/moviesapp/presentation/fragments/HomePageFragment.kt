@@ -102,6 +102,24 @@ class HomePageFragment : Fragment() {
                         }
                     }
                 }
+                launch {
+                    viewModel.dynamicSelectionState.collect { state ->
+                        when(state) {
+                            HomePageState.Loading -> {  }
+                            HomePageState.Success -> {
+                                viewModel.dynamicSelectionFilms?.country?.country?.let { binding.dynamicSelectionBlock.mainText?.text = it }
+                            }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.allDynamicSelectionState.collect { dynamicSelectionState ->
+                        when(dynamicSelectionState) {
+                            AllButtonState.Visible -> setVisible(binding.dynamicSelectionBlock.additionalText)
+                            else -> { }
+                        }
+                    }
+                }
             }
         }
     }
