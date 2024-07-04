@@ -7,6 +7,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.examples.moviesapp.R
 import com.examples.moviesapp.databinding.MovieBlockLayoutBinding
 import com.examples.moviesapp.presentation.recyclers.adapters.CollectionsAdapter
+import com.examples.moviesapp.presentation.recyclers.adapters.DynamicAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
 
 class MovieBlockLayout @JvmOverloads constructor(
@@ -42,6 +43,10 @@ class MovieBlockLayout @JvmOverloads constructor(
     }
 
     fun setAdapter(adapter: CollectionsAdapter) {
+        binding.recycler.adapter = adapter
+    }
+
+    fun setAdapter(adapter: DynamicAdapter) {
         binding.recycler.adapter = adapter
     }
 }

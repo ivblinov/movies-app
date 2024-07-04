@@ -11,14 +11,16 @@ class MapperFilmListFullPresentModel @Inject constructor() {
     fun transform(
         filmListModel: FilmListModel?,
         country: CountryObjectModel?,
-        genre: GenreObjectModel?
+        genre: GenreObjectModel?,
+        titleBlock: String?
     ): FilmListFullPresentModel {
         return FilmListFullPresentModel(
             total = filmListModel?.total,
             totalPages = filmListModel?.totalPages,
             items = filmListModel?.items,
             country = country,
-            genre = genre
+            genre = genre,
+            titleBlock = titleBlock
         )
     }
 }
