@@ -9,4 +9,5 @@ interface FilmListFull {
     val items: List<Film>?
     val country: CountryObject?
     val genre: GenreObject?
+    val titleBlock: String?
 }

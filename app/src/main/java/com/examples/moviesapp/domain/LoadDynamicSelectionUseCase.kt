@@ -3,10 +3,13 @@ package com.examples.moviesapp.domain
 import com.examples.moviesapp.data.Repository
 import com.examples.moviesapp.domain.mappers.MapperFilmListFullPresentModel
 import com.examples.moviesapp.domain.models.FilmListModel
+import com.examples.moviesapp.domain.models.FilmModel
 import com.examples.moviesapp.domain.models.country_list_model.CountryObjectModel
 import com.examples.moviesapp.domain.models.country_list_model.GenreObjectModel
 import com.examples.moviesapp.presentation.presentation_models.FilmListFullPresentModel
 import javax.inject.Inject
+
+private const val PATH_NO_POSTER = "https://kinopoiskapiunofficial.tech/images/posters/kp/1001377.jpg"
 
 class LoadDynamicSelectionUseCase @Inject constructor(
     private val repository: Repository,
@@ -18,19 +21,24 @@ class LoadDynamicSelectionUseCase @Inject constructor(
     private var country: CountryObjectModel? = null
     private var genre: GenreObjectModel? = null
     private var filmList: FilmListModel? = null
-
-    private suspend fun loadGenreCountryList() {
-        val genreCountryList = repository.loadGenreCountyList()
-        countries = genreCountryList.countries
-        genres = genreCountryList.genres
-    }
-
-    private fun getRandomListsOfGenreCountry() {
-        country = countries?.randomOrNull()
-        genre = genres?.randomOrNull()
-    }
+    private var titleBlock: String? = null
 
     suspend fun loadDynamicSelectionFilms(): FilmListFullPresentModel {
+        do {
+            loadFilms()
+            filterFilmList()
+        } while (
+            filmList?.total == 0
+        )
+        return mapperFilmListFullPresentModel.transform(
+            filmListModel = filmList,
+            country = country,
+            genre = genre,
+            titleBlock = titleBlock,
+        )
+    }
+
+    private suspend fun loadFilms() {
         if (country == null) {
             loadGenreCountryList()
         }
@@ -41,10 +49,30 @@ class LoadDynamicSelectionUseCase @Inject constructor(
         } while (
             filmList?.total == 0
         )
-        return mapperFilmListFullPresentModel.transform(
-            filmListModel = filmList,
-            country = country,
-            genre = genre
-        )
+    }
+
+    private fun filterFilmList() {
+        val newFilmList = mutableListOf<FilmModel>()
+        filmList?.items?.forEach { filmModelLocal ->
+            if ((filmModelLocal.nameRu != null) &&
+                (filmModelLocal.posterUrlPreview != null) &&
+                (filmModelLocal.posterUrlPreview != PATH_NO_POSTER)) {
+                newFilmList.add(filmModelLocal)
+            }
+        }
+        filmList?.items = newFilmList
+        filmList?.total = newFilmList.size
+    }
+
+    private suspend fun loadGenreCountryList() {
+        val genreCountryList = repository.loadGenreCountyList()
+        countries = genreCountryList.countries
+        genres = genreCountryList.genres
+    }
+
+    private fun getRandomListsOfGenreCountry() {
+        country = countries?.randomOrNull()
+        genre = genres?.randomOrNull()
+        titleBlock = "${genre?.genre} ${country?.country}"
     }
 }

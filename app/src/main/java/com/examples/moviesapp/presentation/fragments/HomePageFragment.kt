@@ -11,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.examples.moviesapp.app.MovieApplication
 import com.examples.moviesapp.databinding.FragmentHomePageBinding
 import com.examples.moviesapp.presentation.recyclers.adapters.CollectionsAdapter
+import com.examples.moviesapp.presentation.recyclers.adapters.DynamicAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
 import com.examples.moviesapp.presentation.states.AllButtonState
 import com.examples.moviesapp.presentation.states.HomePageState
@@ -23,10 +24,21 @@ class HomePageFragment : Fragment() {
 
     private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
-    @Inject lateinit var viewModel: HomePageViewModel
-    @Inject lateinit var adapter: MovieAdapter
-    @Inject lateinit var popularAdapter: CollectionsAdapter
-    @Inject lateinit var top250Adapter: CollectionsAdapter
+
+    @Inject
+    lateinit var viewModel: HomePageViewModel
+
+    @Inject
+    lateinit var adapter: MovieAdapter
+
+    @Inject
+    lateinit var popularAdapter: CollectionsAdapter
+
+    @Inject
+    lateinit var top250Adapter: CollectionsAdapter
+
+    @Inject
+    lateinit var dynamicAdapter: DynamicAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,32 +55,35 @@ class HomePageFragment : Fragment() {
         binding.premieresBlock.setAdapter(adapter)
         binding.popularBlock.setAdapter(popularAdapter)
         binding.top250Block.setAdapter(top250Adapter)
+        binding.dynamicSelectionBlock.setAdapter(dynamicAdapter)
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 launch {
                     viewModel.premiereState.collect { state ->
-                        when(state) {
+                        when (state) {
                             HomePageState.Success -> {
                                 viewModel.premiereList?.items?.let { adapter.setData(it) }
                             }
-                            HomePageState.Loading -> { }
+
+                            HomePageState.Loading -> {}
                         }
                     }
                 }
                 launch {
                     viewModel.allPremiereState.collect { premiereState ->
-                        when(premiereState) {
+                        when (premiereState) {
                             AllButtonState.Visible ->
                                 setVisible(binding.premieresBlock.additionalText)
-                            else -> { }
+
+                            else -> {}
                         }
                     }
                 }
                 launch {
                     viewModel.popularState.collect { state ->
-                        when(state) {
-                            HomePageState.Loading -> { }
+                        when (state) {
+                            HomePageState.Loading -> {}
                             HomePageState.Success -> {
                                 viewModel.popularFilms?.items?.let { popularAdapter.setData(it) }
                             }
@@ -77,17 +92,18 @@ class HomePageFragment : Fragment() {
                 }
                 launch {
                     viewModel.allPopularState.collect { popularState ->
-                        when(popularState) {
+                        when (popularState) {
                             AllButtonState.Visible ->
                                 setVisible(binding.popularBlock.additionalText)
-                            else -> { }
+
+                            else -> {}
                         }
                     }
                 }
                 launch {
                     viewModel.top250State.collect { state ->
-                        when(state) {
-                            HomePageState.Loading -> { }
+                        when (state) {
+                            HomePageState.Loading -> {}
                             HomePageState.Success -> {
                                 viewModel.top250Films?.items?.let { top250Adapter.setData(it) }
                             }
@@ -96,9 +112,35 @@ class HomePageFragment : Fragment() {
                 }
                 launch {
                     viewModel.allTop250State.collect { top250State ->
-                        when(top250State) {
+                        when (top250State) {
                             AllButtonState.Visible -> setVisible(binding.top250Block.additionalText)
-                            else -> { }
+                            else -> {}
+                        }
+                    }
+                }
+                launch {
+                    viewModel.dynamicSelectionState.collect { state ->
+                        when (state) {
+                            HomePageState.Loading -> {}
+                            HomePageState.Success -> {
+                                viewModel.dynamicSelectionFilms?.items?.let {
+                                    dynamicAdapter.setData(it)
+                                }
+                                viewModel.dynamicSelectionFilms?.titleBlock?.let {
+                                    binding.dynamicSelectionBlock.mainText?.text =
+                                        it.replaceFirstChar { char ->
+                                            char.uppercase()
+                                        }
+                                }
+                            }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.allDynamicSelectionState.collect { dynamicSelectionState ->
+                        when (dynamicSelectionState) {
+                            AllButtonState.Visible -> setVisible(binding.dynamicSelectionBlock.additionalText)
+                            else -> {}
                         }
                     }
                 }

@@ -10,5 +10,6 @@ data class FilmListFullPresentModel(
     override val totalPages: Int?,
     override val items: List<FilmModel>?,
     override val country: CountryObjectModel?,
-    override val genre: GenreObjectModel?
+    override val genre: GenreObjectModel?,
+    override val titleBlock: String?,
 ) : FilmListFull

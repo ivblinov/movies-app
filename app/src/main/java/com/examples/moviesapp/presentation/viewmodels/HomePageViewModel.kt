@@ -6,7 +6,6 @@ import com.examples.moviesapp.domain.LoadCollectionsUseCase
 import com.examples.moviesapp.domain.LoadDynamicSelectionUseCase
 import com.examples.moviesapp.domain.LoadPremiereListUseCase
 import com.examples.moviesapp.entities.Collections
-import com.examples.moviesapp.entities.FilmList
 import com.examples.moviesapp.entities.FilmListFull
 import com.examples.moviesapp.entities.MovieList
 import com.examples.moviesapp.presentation.states.AllButtonState
