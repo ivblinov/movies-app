@@ -58,5 +58,14 @@
             app:block_additional_text="@string/everyone"
             app:block_main_text="@string/top_250" />
 
+        <!-- dynamic_selection_2-->
+        <com.examples.moviesapp.presentation.custom_layouts.MovieBlockLayout
+            android:id="@+id/dynamic_selection_block_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_movie_block"
+            app:block_additional_text="@string/everyone"
+            app:block_main_text="@string/dynamic_selection" />
+
     </LinearLayout>
 </ScrollView>
