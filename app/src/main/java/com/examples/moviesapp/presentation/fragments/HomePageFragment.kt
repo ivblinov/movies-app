@@ -40,6 +40,9 @@ class HomePageFragment : Fragment() {
     @Inject
     lateinit var dynamicAdapter: DynamicAdapter
 
+    @Inject
+    lateinit var dynamicAdapter2: DynamicAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,6 +59,7 @@ class HomePageFragment : Fragment() {
         binding.popularBlock.setAdapter(popularAdapter)
         binding.top250Block.setAdapter(top250Adapter)
         binding.dynamicSelectionBlock.setAdapter(dynamicAdapter)
+        binding.dynamicSelectionBlock2.setAdapter(dynamicAdapter2)
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
@@ -140,6 +144,32 @@ class HomePageFragment : Fragment() {
                     viewModel.allDynamicSelectionState.collect { dynamicSelectionState ->
                         when (dynamicSelectionState) {
                             AllButtonState.Visible -> setVisible(binding.dynamicSelectionBlock.additionalText)
+                            else -> {}
+                        }
+                    }
+                }
+                launch {
+                    viewModel.dynamicSelectionState2.collect { state ->
+                        when (state) {
+                            HomePageState.Loading -> {}
+                            HomePageState.Success -> {
+                                viewModel.dynamicSelectionFilms2?.items?.let {
+                                    dynamicAdapter2.setData(it)
+                                }
+                                viewModel.dynamicSelectionFilms2?.titleBlock?.let {
+                                    binding.dynamicSelectionBlock2.mainText?.text =
+                                        it.replaceFirstChar { char ->
+                                            char.uppercase()
+                                        }
+                                }
+                            }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.allDynamicSelectionState2.collect { dynamicSelectionState ->
+                        when (dynamicSelectionState) {
+                            AllButtonState.Visible -> setVisible(binding.dynamicSelectionBlock2.additionalText)
                             else -> {}
                         }
                     }
