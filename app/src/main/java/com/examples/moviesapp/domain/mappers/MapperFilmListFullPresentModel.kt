@@ -15,7 +15,7 @@ class MapperFilmListFullPresentModel @Inject constructor() {
         titleBlock: String?
     ): FilmListFullPresentModel {
         return FilmListFullPresentModel(
-            total = filmListModel?.total,
+            total = filmListModel?.items?.size,
             totalPages = filmListModel?.totalPages,
             items = filmListModel?.items,
             country = country,
