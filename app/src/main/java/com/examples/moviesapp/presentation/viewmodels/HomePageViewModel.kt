@@ -28,6 +28,7 @@ class HomePageViewModel @Inject constructor(
     var top250Films: Collections? = null
     var dynamicSelectionFilms: FilmListFull? = null
     var dynamicSelectionFilms2: FilmListFull? = null
+    var tvSerialsList: Collections? = null
 
     private val _premiereState = MutableStateFlow<HomePageState>(HomePageState.Success)
     val premiereState = _premiereState.asStateFlow()
@@ -59,12 +60,19 @@ class HomePageViewModel @Inject constructor(
     private val _allDynamicSelectionState2 = MutableStateFlow<AllButtonState>(AllButtonState.Gone)
     val allDynamicSelectionState2 = _allDynamicSelectionState2.asStateFlow()
 
+    private val _tvSerialsState = MutableStateFlow<HomePageState>(HomePageState.Success)
+    val tvSerialsState = _tvSerialsState.asStateFlow()
+
+    private val _allSerialsState = MutableStateFlow<AllButtonState>(AllButtonState.Gone)
+    val allSerialsState = _allSerialsState.asStateFlow()
+
     init {
         loadPremiere()
         loadPopular()
         loadTop250()
         loadDynamicSelection()
         loadDynamicSelection2()
+        loadTvSerials()
     }
 
     private fun loadPremiere() {
@@ -109,6 +117,15 @@ class HomePageViewModel @Inject constructor(
             dynamicSelectionFilms2 = loadDynamicSelection2UseCase.loadDynamicSelectionFilms()
             dynamicSelectionFilms2?.let { checkMovieListSize(_allDynamicSelectionState2, it.total) }
             _dynamicSelectionState2.value = HomePageState.Success
+        }
+    }
+
+    private fun loadTvSerials() {
+        viewModelScope.launch {
+            _tvSerialsState.value = HomePageState.Loading
+            tvSerialsList = loadCollectionsUseCase.loadTvSerials()
+            tvSerialsList?.let { checkMovieListSize(_allSerialsState, it.total) }
+            _tvSerialsState.value = HomePageState.Success
         }
     }
 

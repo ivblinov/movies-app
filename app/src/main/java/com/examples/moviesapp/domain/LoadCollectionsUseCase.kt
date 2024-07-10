@@ -10,6 +10,7 @@ class LoadCollectionsUseCase @Inject constructor(
 ) {
     private val typePopularMovies = "TOP_POPULAR_MOVIES"
     private val typeTop250Movies = "TOP_250_MOVIES"
+    private val typeTvSerials = "POPULAR_SERIES"
     private val page = 1
 
     suspend fun loadPopularMovies(): CollectionsModel? {
@@ -20,5 +21,10 @@ class LoadCollectionsUseCase @Inject constructor(
     suspend fun loadTop250Movies(): CollectionsModel? {
         val top250Movies = repository.loadCollections(typeTop250Movies, page)
         return shuffleList(top250Movies)
+    }
+
+    suspend fun loadTvSerials(): CollectionsModel? {
+        val tvSerials = repository.loadCollections(typeTvSerials, page)
+        return shuffleList(tvSerials)
     }
 }

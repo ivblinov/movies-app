@@ -9,6 +9,8 @@
 
     <dimen name="margin_end_home_page">30dp</dimen>
 
+    <dimen name="margin_bottom_serials_block">50dp</dimen>
+
     <!--    padding-->
     <dimen name="padding_start_recycler_premiere">30dp</dimen>
 </resources>
