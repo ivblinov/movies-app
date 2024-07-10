@@ -67,5 +67,15 @@
             app:block_additional_text="@string/everyone"
             app:block_main_text="@string/dynamic_selection" />
 
+        <!-- tv_serials-->
+        <com.examples.moviesapp.presentation.custom_layouts.MovieBlockLayout
+            android:id="@+id/tv_serials_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_movie_block"
+            android:layout_marginBottom="@dimen/margin_bottom_serials_block"
+            app:block_additional_text="@string/everyone"
+            app:block_main_text="@string/tv_serials" />
+
     </LinearLayout>
 </ScrollView>

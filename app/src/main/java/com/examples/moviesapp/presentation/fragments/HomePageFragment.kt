@@ -43,6 +43,9 @@ class HomePageFragment : Fragment() {
     @Inject
     lateinit var dynamicAdapter2: DynamicAdapter
 
+    @Inject
+    lateinit var tvSerialsAdapter: CollectionsAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,6 +63,7 @@ class HomePageFragment : Fragment() {
         binding.top250Block.setAdapter(top250Adapter)
         binding.dynamicSelectionBlock.setAdapter(dynamicAdapter)
         binding.dynamicSelectionBlock2.setAdapter(dynamicAdapter2)
+        binding.tvSerialsBlock.setAdapter(tvSerialsAdapter)
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
@@ -170,6 +174,24 @@ class HomePageFragment : Fragment() {
                     viewModel.allDynamicSelectionState2.collect { dynamicSelectionState ->
                         when (dynamicSelectionState) {
                             AllButtonState.Visible -> setVisible(binding.dynamicSelectionBlock2.additionalText)
+                            else -> {}
+                        }
+                    }
+                }
+                launch {
+                    viewModel.tvSerialsState.collect { state ->
+                        when (state) {
+                            HomePageState.Loading -> {}
+                            HomePageState.Success -> {
+                                viewModel.tvSerialsList?.items?.let { tvSerialsAdapter.setData(it) }
+                            }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.allSerialsState.collect { serialsState ->
+                        when (serialsState) {
+                            AllButtonState.Visible -> setVisible(binding.tvSerialsBlock.additionalText)
                             else -> {}
                         }
                     }
