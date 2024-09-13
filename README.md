@@ -1,4 +1,4 @@
-## <image src='app/src/main/res/drawable/ic_app.xml' width=50 /> Movies App
+## Movies App
 
 ## Описание:
 <p>
@@ -30,6 +30,8 @@
 - реализация многопоточности и асинхронности - Coroutines, Flow
 - навигация - AndroidX-Navigation, Fragments и Bottom Navigation
 - вёрстка - XML, Custom View, RecyclerView
+
+<br>
 
 ## Запуск проекта:
 
