@@ -1,6 +1,7 @@
 package com.examples.moviesapp.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.examples.moviesapp.setVisible
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val TAG = "MyLog"
 class HomePageFragment : Fragment() {
 
     private var _binding: FragmentHomePageBinding? = null
@@ -183,7 +185,10 @@ class HomePageFragment : Fragment() {
                         when (state) {
                             HomePageState.Loading -> {}
                             HomePageState.Success -> {
-                                viewModel.tvSerialsList?.items?.let { tvSerialsAdapter.setData(it) }
+                                viewModel.tvSerialsList?.items?.let {
+                                    Log.d(TAG, "onViewCreated: serials = $it")
+                                    tvSerialsAdapter.setData(it)
+                                }
                             }
                         }
                     }

@@ -1,10 +1,12 @@
 package com.examples.moviesapp.domain
 
+import android.util.Log
 import com.examples.moviesapp.data.Repository
 import com.examples.moviesapp.domain.models.CollectionsModel
 import com.examples.moviesapp.shuffleList
 import javax.inject.Inject
 
+private const val TAG = "MyLog"
 class LoadCollectionsUseCase @Inject constructor(
     private val repository: Repository
 ) {
@@ -25,6 +27,7 @@ class LoadCollectionsUseCase @Inject constructor(
 
     suspend fun loadTvSerials(): CollectionsModel? {
         val tvSerials = repository.loadCollections(typeTvSerials, page)
+        Log.d(TAG, "loadTvSerials: $tvSerials")
         return shuffleList(tvSerials)
     }
 }
