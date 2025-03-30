@@ -1,14 +1,18 @@
 package com.examples.moviesapp.presentation.recyclers.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.MovieItemBinding
 import com.examples.moviesapp.entities.Movie
-import javax.inject.Inject
 
-class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+private const val TAG = "MyLog"
+
+class MovieAdapter(
+    private val onClick: () -> Unit,
+) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private val data: MutableList<Movie> = ArrayList()
 
@@ -18,7 +22,8 @@ class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.Mov
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onClick = onClick,
         )
     }
 
@@ -36,10 +41,20 @@ class MovieAdapter @Inject constructor() : RecyclerView.Adapter<MovieAdapter.Mov
                     .into(poster)
             }
         }
+        holder.onBind()
     }
 
-    inner class MovieViewHolder(val binding: MovieItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class MovieViewHolder(
+        val binding: MovieItemBinding,
+        private val onClick: () -> Unit,
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun onBind() {
+            binding.root.setOnClickListener {
+                onClick()
+            }
+        }
+    }
 
     fun setData(data: List<Movie>) {
         this.data.addAll(data)

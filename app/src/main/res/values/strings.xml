@@ -1,11 +1,8 @@
 <resources>
     <string name="app_name">Movies App</string>
+
+    <!--  HOME  -->
     <string name="button_home">home</string>
-    <string name="button_search">search</string>
-    <string name="button_profile">profile</string>
-    <string name="title_search">SEARCH</string>
-    <string name="title_home">HOME</string>
-    <string name="title_profile">PROFILE</string>
     <string name="skillcinema">Skillcinema</string>
     <string name="arrow_right">Стрелка вправо</string>
     <string name="premier">Премьеры</string>
@@ -15,4 +12,16 @@
     <string name="top_250">Топ-250</string>
     <string name="dynamic_selection">Динамическая подборка</string>
     <string name="tv_serials">Сериалы</string>
+
+    <!--  SEARCH  -->
+    <string name="button_search">search</string>
+    <string name="title_search">SEARCH</string>
+
+    <!--  PROFILE  -->
+    <string name="button_profile">profile</string>
+    <string name="title_profile">PROFILE</string>
+
+    <!--  FILM  -->
+    <string name="description_poster">poster</string>
+
 </resources>
