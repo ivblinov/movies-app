@@ -1,7 +1,6 @@
-package com.examples.moviesapp.presentation.fragments
+package com.examples.moviesapp.presentation.screens.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,22 +15,19 @@ import com.examples.moviesapp.presentation.recyclers.adapters.DynamicAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
 import com.examples.moviesapp.presentation.states.AllButtonState
 import com.examples.moviesapp.presentation.states.HomePageState
-import com.examples.moviesapp.presentation.viewmodels.HomePageViewModel
-import com.examples.moviesapp.setVisible
+import com.examples.moviesapp.utils.setVisible
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val TAG = "MyLog"
-class HomePageFragment : Fragment() {
+
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomePageBinding? = null
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var viewModel: HomePageViewModel
-
-    @Inject
-    lateinit var adapter: MovieAdapter
+    lateinit var viewModel: HomeViewModel
 
     @Inject
     lateinit var popularAdapter: CollectionsAdapter
@@ -60,7 +56,9 @@ class HomePageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.premieresBlock.setAdapter(adapter)
+        val movieAdapter = MovieAdapter(onClick = viewModel::navigateToFilm)
+
+        binding.premieresBlock.setAdapter(movieAdapter)
         binding.popularBlock.setAdapter(popularAdapter)
         binding.top250Block.setAdapter(top250Adapter)
         binding.dynamicSelectionBlock.setAdapter(dynamicAdapter)
@@ -73,7 +71,9 @@ class HomePageFragment : Fragment() {
                     viewModel.premiereState.collect { state ->
                         when (state) {
                             HomePageState.Success -> {
-                                viewModel.premiereList?.items?.let { adapter.setData(it) }
+                                viewModel.premiereList?.items?.let {
+                                    binding.premieresBlock.getMovieAdapter().setData(it)
+                                }
                             }
 
                             HomePageState.Loading -> {}
@@ -186,7 +186,6 @@ class HomePageFragment : Fragment() {
                             HomePageState.Loading -> {}
                             HomePageState.Success -> {
                                 viewModel.tvSerialsList?.items?.let {
-                                    Log.d(TAG, "onViewCreated: serials = $it")
                                     tvSerialsAdapter.setData(it)
                                 }
                             }

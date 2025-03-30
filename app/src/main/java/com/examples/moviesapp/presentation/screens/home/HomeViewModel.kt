@@ -1,4 +1,4 @@
-package com.examples.moviesapp.presentation.viewmodels
+package com.examples.moviesapp.presentation.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +9,7 @@ import com.examples.moviesapp.domain.LoadPremiereListUseCase
 import com.examples.moviesapp.entities.Collections
 import com.examples.moviesapp.entities.FilmListFull
 import com.examples.moviesapp.entities.MovieList
+import com.examples.moviesapp.presentation.navigation.Navigator
 import com.examples.moviesapp.presentation.states.AllButtonState
 import com.examples.moviesapp.presentation.states.HomePageState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,11 +17,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class HomePageViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val loadPremiereListUseCase: LoadPremiereListUseCase,
     private val loadCollectionsUseCase: LoadCollectionsUseCase,
     private val loadDynamicSelectionUseCase: LoadDynamicSelectionUseCase,
     private val loadDynamicSelection2UseCase: LoadDynamicSelection2UseCase,
+    private val navigator: Navigator,
 ) : ViewModel() {
 
     var premiereList: MovieList? = null
@@ -136,5 +138,9 @@ class HomePageViewModel @Inject constructor(
         if (listSize != null && listSize > size) {
             state.value = AllButtonState.Visible
         }
+    }
+
+    fun navigateToFilm() {
+        navigator.navigateToFilm()
     }
 }

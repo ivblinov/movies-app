@@ -49,4 +49,10 @@ class MovieBlockLayout @JvmOverloads constructor(
     fun setAdapter(adapter: DynamicAdapter) {
         binding.recycler.adapter = adapter
     }
+
+    fun getMovieAdapter(): MovieAdapter = binding.recycler.adapter as MovieAdapter
+
+    fun getCollectionsAdapter(): CollectionsAdapter = binding.recycler.adapter as CollectionsAdapter
+
+    fun getDynamicAdapter(): DynamicAdapter = binding.recycler.adapter as DynamicAdapter
 }

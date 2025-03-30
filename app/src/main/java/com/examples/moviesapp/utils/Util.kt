@@ -1,4 +1,4 @@
-package com.examples.moviesapp
+package com.examples.moviesapp.utils
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView

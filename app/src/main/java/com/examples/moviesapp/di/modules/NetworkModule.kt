@@ -1,4 +1,4 @@
-package com.examples.moviesapp.di
+package com.examples.moviesapp.di.modules
 
 import com.examples.moviesapp.data.api.KinoService
 import dagger.Module
