@@ -5,6 +5,7 @@ import com.examples.moviesapp.di.modules.AppModule
 import com.examples.moviesapp.di.modules.NavigationModule
 import com.examples.moviesapp.di.modules.NetworkModule
 import com.examples.moviesapp.presentation.MainActivity
+import com.examples.moviesapp.presentation.screens.film.FilmFragment
 import com.examples.moviesapp.presentation.screens.home.HomeFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -32,4 +33,6 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
 
     fun inject(homeFragment: HomeFragment)
+
+    fun inject(filmFragment: FilmFragment)
 }

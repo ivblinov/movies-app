@@ -1,26 +1,45 @@
 package com.examples.moviesapp.presentation.screens.film
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.examples.moviesapp.R
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.FragmentFilmBinding
+import com.examples.moviesapp.domain.models.MovieModel
+import com.examples.moviesapp.presentation.recyclers.adapters.StaffAdapter
+import com.examples.moviesapp.presentation.states.State
+import com.examples.moviesapp.utils.appComponent
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-private const val ARG_PARAM1 = "param1"
+private const val TAG = "MyLog"
+const val GRID_SIZE = 20
 
 class FilmFragment : Fragment() {
 
     private var _binding: FragmentFilmBinding? = null
     private val binding get() = _binding!!
 
-    private var param1: String? = null
+    private var movie: MovieModel? = null
+
+    @Inject
+    lateinit var viewModel: FilmViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        inject()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
+            movie = it.getParcelable(MOVIE_KEY)
         }
     }
 
@@ -32,18 +51,56 @@ class FilmFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.actorRV.adapter = StaffAdapter()
+
+        subscribe()
+
+        movie?.kinopoiskId?.let { viewModel.getCastList(it) }
+
+        movie?.let { film ->
+            Glide
+                .with(requireContext())
+                .load(film.posterUrl)
+                .into(binding.poster)
+        }
+
+        binding.year.text = movie?.year.toString()
+        binding.country.text = movie?.countries[0]?.country
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String) =
-            FilmFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
+    private fun inject() {
+        requireContext().appComponent().inject(this)
+    }
+
+    private fun subscribe() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.state.collect { state ->
+                when (state) {
+                    State.Loading -> {}
+                    State.Success -> {
+                        val numberActors = viewModel.actors.size
+                        binding.numberActors.text =
+                            if (numberActors > GRID_SIZE) numberActors.toString() else ""
+                        getStaffAdapter().updateList(viewModel.actors)
+                    }
                 }
             }
+        }
+    }
+
+    private fun getStaffAdapter() = binding.actorRV.adapter as StaffAdapter
+
+    companion object {
+        fun createBundle(movie: MovieModel) = bundleOf(MOVIE_KEY to movie)
+
+        private const val MOVIE_KEY = "MOVIE_KEY"
     }
 }

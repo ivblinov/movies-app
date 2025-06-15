@@ -1,4 +1,4 @@
-package com.examples.moviesapp.domain
+package com.examples.moviesapp.domain.use_cases
 
 import com.examples.moviesapp.data.Repository
 import com.examples.moviesapp.domain.models.CollectionsModel

@@ -2,13 +2,14 @@ package com.examples.moviesapp.presentation.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.examples.moviesapp.domain.LoadCollectionsUseCase
-import com.examples.moviesapp.domain.LoadDynamicSelection2UseCase
-import com.examples.moviesapp.domain.LoadDynamicSelectionUseCase
+import com.examples.moviesapp.domain.use_cases.LoadCollectionsUseCase
+import com.examples.moviesapp.domain.use_cases.LoadDynamicSelection2UseCase
+import com.examples.moviesapp.domain.use_cases.LoadDynamicSelectionUseCase
 import com.examples.moviesapp.domain.LoadPremiereListUseCase
+import com.examples.moviesapp.domain.models.MovieListModel
+import com.examples.moviesapp.domain.models.MovieModel
 import com.examples.moviesapp.entities.Collections
 import com.examples.moviesapp.entities.FilmListFull
-import com.examples.moviesapp.entities.MovieList
 import com.examples.moviesapp.presentation.navigation.Navigator
 import com.examples.moviesapp.presentation.states.AllButtonState
 import com.examples.moviesapp.presentation.states.HomePageState
@@ -25,7 +26,7 @@ class HomeViewModel @Inject constructor(
     private val navigator: Navigator,
 ) : ViewModel() {
 
-    var premiereList: MovieList? = null
+    var premiereList: MovieListModel? = null
     var popularFilms: Collections? = null
     var top250Films: Collections? = null
     var dynamicSelectionFilms: FilmListFull? = null
@@ -140,7 +141,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun navigateToFilm() {
-        navigator.navigateToFilm()
+    fun navigateToFilm(movie: MovieModel) {
+        navigator.navigateToFilm(movie)
     }
 }

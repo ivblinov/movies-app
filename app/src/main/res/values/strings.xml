@@ -23,5 +23,6 @@
 
     <!--  FILM  -->
     <string name="description_poster">poster</string>
+    <string name="text_cast_of_the_film">В фильме снимались</string>
 
 </resources>

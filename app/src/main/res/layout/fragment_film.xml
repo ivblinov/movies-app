@@ -1,19 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.screens.film.FilmFragment">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/description_poster"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/film_poster" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/poster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/description_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/film_poster" />
+
+        <LinearLayout
+            android:id="@+id/actionBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/action_bar_margin_bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/poster"
+            app:layout_constraintEnd_toEndOf="@+id/poster"
+            app:layout_constraintStart_toStartOf="@+id/poster">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_favorite" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/action_bar_item_margin_start"
+                android:src="@drawable/ic_want_to_watch" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/action_bar_item_margin_start"
+                android:src="@drawable/ic_watched" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/action_bar_item_margin_start"
+                android:src="@drawable/ic_share" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/action_bar_item_margin_start"
+                android:src="@drawable/ic_extra" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/country"
+            style="@style/PosterTextSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/actionBar"
+            app:layout_constraintEnd_toEndOf="@+id/actionBar"
+            app:layout_constraintStart_toStartOf="@+id/actionBar"
+            tools:text="Россия, 1 ч 33 мин, 16+" />
+
+        <TextView
+            android:id="@+id/year"
+            style="@style/PosterTextSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/country"
+            app:layout_constraintEnd_toEndOf="@+id/actionBar"
+            app:layout_constraintStart_toStartOf="@+id/actionBar"
+            tools:text="2020, драма, приключения" />
+
+        <TextView
+            style="@style/PosterTextSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/year"
+            app:layout_constraintEnd_toEndOf="@+id/actionBar"
+            app:layout_constraintStart_toStartOf="@+id/actionBar"
+            tools:text="6.4 Китобой" />
+
+        <TextView
+            android:id="@+id/description"
+            style="@style/FilmDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/poster"
+            tools:text="Чукотский парень влюбляется в американскую вебкам-модель. Приз Венеции, Кристина Асмус в роли девушки мечты" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/titleCastBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/film_margin_start"
+            android:layout_marginTop="40dp"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description">
+
+            <TextView
+                android:id="@+id/titleCast"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_cast_of_the_film"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/numberActors"
+                style="@style/ArrowRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iconArrowRight"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="27" />
+
+            <ImageView
+                android:id="@+id/iconArrowRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="@dimen/film_margin_end"
+                android:src="@drawable/ic_arrow_right_18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/actorRV"
+            android:layout_width="match_parent"
+            android:layout_height="296dp"
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/film_margin_start"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleCastBlock"
+            app:spanCount="4"
+            tools:listitem="@layout/item_person" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

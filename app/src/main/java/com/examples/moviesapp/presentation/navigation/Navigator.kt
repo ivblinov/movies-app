@@ -2,6 +2,9 @@ package com.examples.moviesapp.presentation.navigation
 
 import androidx.navigation.NavController
 import com.examples.moviesapp.R
+import com.examples.moviesapp.domain.models.MovieModel
+import com.examples.moviesapp.entities.Movie
+import com.examples.moviesapp.presentation.screens.film.FilmFragment
 
 class Navigator : MovieRouter {
 
@@ -31,10 +34,10 @@ class Navigator : MovieRouter {
         }
     }
 
-    override fun navigateToFilm() {
+    override fun navigateToFilm(movie: MovieModel) {
         if (!canNavigate(R.id.nav_home, R.id.filmFragment))
             return
-        navController?.navigate(R.id.action_nav_home_to_filmFragment)
+        navController?.navigate(R.id.action_nav_home_to_filmFragment, FilmFragment.createBundle(movie))
     }
 
     override fun clickButtonBack() {
