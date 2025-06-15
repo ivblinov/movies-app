@@ -26,7 +26,7 @@ class LoadPremiereListUseCase @Inject constructor(
         setPairMonthYear = getSetPairMonthYear(daysList)
     }
 
-    suspend fun getPremiereList(): MovieList? {
+    suspend fun getPremiereList(): MovieListModel? {
         val movieList = launchLoadingPremiere(setPairMonthYear)
         val movie = filterMovieList(movieList)
         return shuffleList(movie)

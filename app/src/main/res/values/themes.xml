@@ -45,4 +45,40 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">4dp</item>
     </style>
+    
+    <style name="PosterTextSecond">
+        <item name="android:fontFamily">@font/graphik_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/poster_text_second</item>
+    </style>
+    
+    <style name="FilmDescription">
+        <item name="android:fontFamily">@font/graphik_semibold</item>
+        <item name="android:textColor">@color/black_bottom_nav</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    
+    <style name="Title">
+        <item name="android:fontFamily">@font/graphik_semibold</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/black_bottom_nav</item>
+    </style>
+    
+    <style name="ArrowRight">
+        <item name="android:fontFamily">@font/graphik_medium</item>
+        <item name="android:textSize">@dimen/text_size_arrow</item>
+        <item name="android:textColor">@color/blue_bottom_nav</item>
+    </style>
+
+    <style name="ActorName">
+        <item name="android:fontFamily">@font/graphik_regular</item>
+        <item name="android:textSize">@dimen/text_size_arrow</item>
+        <item name="android:textColor">@color/black_bottom_nav</item>
+    </style>
+
+    <style name="CharacterName" parent="ActorName">
+        <item name="android:textSize">@dimen/text_size_character_name</item>
+        <item name="android:textColor">@color/gray_home_genre</item>
+    </style>
+    
 </resources>

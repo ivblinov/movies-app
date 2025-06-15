@@ -6,15 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.MovieItemBinding
+import com.examples.moviesapp.domain.models.MovieModel
 import com.examples.moviesapp.entities.Movie
 
 private const val TAG = "MyLog"
 
 class MovieAdapter(
-    private val onClick: () -> Unit,
+    private val onClick: (movie: MovieModel) -> Unit,
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
-    private val data: MutableList<Movie> = ArrayList()
+    private val data: MutableList<MovieModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder(
@@ -41,22 +42,22 @@ class MovieAdapter(
                     .into(poster)
             }
         }
-        holder.onBind()
+        item?.let { holder.onBind(it) }
     }
 
     inner class MovieViewHolder(
         val binding: MovieItemBinding,
-        private val onClick: () -> Unit,
+        private val onClick: (movie: MovieModel) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind() {
+        fun onBind(movie: MovieModel) {
             binding.root.setOnClickListener {
-                onClick()
+                onClick(movie)
             }
         }
     }
 
-    fun setData(data: List<Movie>) {
+    fun setData(data: List<MovieModel>) {
         this.data.addAll(data)
         notifyDataSetChanged()
     }
