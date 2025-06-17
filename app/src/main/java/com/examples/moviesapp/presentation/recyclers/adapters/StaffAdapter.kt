@@ -2,7 +2,6 @@ package com.examples.moviesapp.presentation.recyclers.adapters
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,22 +12,17 @@ import com.examples.moviesapp.databinding.ItemPersonBinding
 import com.examples.moviesapp.entities.Staff
 import com.examples.moviesapp.presentation.screens.film.GRID_SIZE
 
-private const val TAG = "MyLog"
-
 class StaffAdapter(
     private var staffList: List<Staff> = listOf(),
+    private val clickPerson: (Int) -> Unit,
 ) : RecyclerView.Adapter<StaffAdapter.ViewHolder>() {
 
     class ViewHolder(
-        val binding: ItemPersonBinding
+        val binding: ItemPersonBinding,
+        private val clickPerson: (Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(person: Staff) {
-
-            Log.d(
-                TAG,
-                "$bindingAdapterPosition ${person.nameRu}     ${person.description}      ${person.posterUrl}"
-            )
 
             Glide
                 .with(binding.photoPerson.context)
@@ -39,6 +33,10 @@ class StaffAdapter(
             binding.actorName.text =
                 if (person.nameRu.isNullOrEmpty()) person.nameEn else person.nameRu
             binding.characterName.text = person.description ?: ""
+
+            binding.root.setOnClickListener {
+                person.staffId?.let { clickPerson.invoke(it) }
+            }
         }
 
         fun dpToPx(dp: Int): Int {
@@ -50,7 +48,10 @@ class StaffAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ViewHolder = ViewHolder(binding = getBinding(parent))
+    ): ViewHolder = ViewHolder(
+        binding = getBinding(parent),
+        clickPerson = clickPerson,
+    )
 
     override fun onBindViewHolder(
         holder: ViewHolder,

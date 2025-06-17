@@ -54,7 +54,7 @@ class FilmFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.actorRV.adapter = StaffAdapter()
+        binding.actorRV.adapter = StaffAdapter(clickPerson = ::navigateToActor)
 
         subscribe()
 
@@ -69,6 +69,10 @@ class FilmFragment : Fragment() {
 
         binding.year.text = movie?.year.toString()
         binding.country.text = movie?.countries[0]?.country
+    }
+
+    private fun navigateToActor(actorId: Int) {
+        viewModel.navigateToActor(actorId)
     }
 
     override fun onDestroyView() {

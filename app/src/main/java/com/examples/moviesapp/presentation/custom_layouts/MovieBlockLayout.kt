@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
 import com.examples.moviesapp.R
 import com.examples.moviesapp.databinding.MovieBlockLayoutBinding
+import com.examples.moviesapp.presentation.recyclers.adapters.BestFilmAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.CollectionsAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.DynamicAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
@@ -38,6 +39,10 @@ class MovieBlockLayout @JvmOverloads constructor(
         typedArray.recycle()
     }
 
+    fun showAdditionalText() {
+        binding.movieBlockTitle.showAdditionalText()
+    }
+
     fun setAdapter(adapter: MovieAdapter) {
         binding.recycler.adapter = adapter
     }
@@ -50,9 +55,15 @@ class MovieBlockLayout @JvmOverloads constructor(
         binding.recycler.adapter = adapter
     }
 
+    fun setAdapter(adapter: BestFilmAdapter) {
+        binding.recycler.adapter = adapter
+    }
+
     fun getMovieAdapter(): MovieAdapter = binding.recycler.adapter as MovieAdapter
 
     fun getCollectionsAdapter(): CollectionsAdapter = binding.recycler.adapter as CollectionsAdapter
 
     fun getDynamicAdapter(): DynamicAdapter = binding.recycler.adapter as DynamicAdapter
+
+    fun getBestFilmAdapter(): BestFilmAdapter = binding.recycler.adapter as BestFilmAdapter
 }

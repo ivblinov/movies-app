@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import com.examples.moviesapp.R
 import com.examples.moviesapp.domain.models.MovieModel
 import com.examples.moviesapp.entities.Movie
+import com.examples.moviesapp.presentation.screens.actor.ActorFragment
 import com.examples.moviesapp.presentation.screens.film.FilmFragment
 
 class Navigator : MovieRouter {
@@ -38,6 +39,12 @@ class Navigator : MovieRouter {
         if (!canNavigate(R.id.nav_home, R.id.filmFragment))
             return
         navController?.navigate(R.id.action_nav_home_to_filmFragment, FilmFragment.createBundle(movie))
+    }
+
+    override fun navigateToActor(actorId: Int) {
+        if (!canNavigate(R.id.filmFragment, R.id.actorFragment))
+            return
+        navController?.navigate(R.id.action_filmFragment_to_actorFragment, ActorFragment.createBundle(actorId))
     }
 
     override fun clickButtonBack() {

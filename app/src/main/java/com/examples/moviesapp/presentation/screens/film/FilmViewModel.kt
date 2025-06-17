@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.examples.moviesapp.domain.use_cases.staff.StaffUseCase
 import com.examples.moviesapp.entities.Staff
+import com.examples.moviesapp.presentation.navigation.Navigator
 import com.examples.moviesapp.presentation.states.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +16,7 @@ import javax.inject.Inject
 private const val TAG = "MyLog"
 class FilmViewModel @Inject constructor(
     private val staffUseCase: StaffUseCase,
+    private val navigator: Navigator,
 ) : ViewModel() {
 
     var actors: List<Staff> = listOf()
@@ -28,5 +30,9 @@ class FilmViewModel @Inject constructor(
             actors = staffUseCase.getCastList(movieId)
             _state.value = State.Success
         }
+    }
+
+    fun navigateToActor(actorId: Int) {
+        navigator.navigateToActor(actorId)
     }
 }

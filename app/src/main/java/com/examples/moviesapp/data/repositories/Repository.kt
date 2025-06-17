@@ -1,4 +1,4 @@
-package com.examples.moviesapp.data
+package com.examples.moviesapp.data.repositories
 
 import com.examples.moviesapp.data.data_source.CollectionsDataSource
 import com.examples.moviesapp.data.data_source.FilmListDataSource

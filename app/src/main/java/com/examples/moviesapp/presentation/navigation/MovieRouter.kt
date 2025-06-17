@@ -9,4 +9,6 @@ interface MovieRouter {
     fun clickButtonBack()
 
     fun navigateToFilm(movie: MovieModel)
+
+    fun navigateToActor(actorId: Int)
 }

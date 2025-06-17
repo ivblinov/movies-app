@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screens.actor.ActorFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/backButton"
+            style="@style/BackButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/describe_icon_back_button"
+            android:src="@drawable/ic_arrow_left_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="@dimen/actor_photo_width"
+            android:layout_height="@dimen/actor_photo_height"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginTop="@dimen/actor_photo_margin_top"
+            android:contentDescription="@string/describe_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/backButton"
+            tools:src="@drawable/photo_preview" />
+
+        <TextView
+            android:id="@+id/nameActor"
+            style="@style/FilmDescription"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/photo"
+            app:layout_constraintTop_toTopOf="@+id/photo"
+            tools:text="Кристина Асмус" />
+
+        <TextView
+            android:id="@+id/profession"
+            style="@style/CharacterName"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/actor_profession_margin_top"
+            android:layout_marginEnd="@dimen/margin_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/nameActor"
+            app:layout_constraintTop_toBottomOf="@+id/nameActor"
+            tools:text="Актриса" />
+
+        <com.examples.moviesapp.presentation.custom_layouts.MovieBlockLayout
+            android:id="@+id/best"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/actor_best_margin_top"
+            app:block_additional_text="@string/everyone"
+            app:block_main_text="@string/best"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
