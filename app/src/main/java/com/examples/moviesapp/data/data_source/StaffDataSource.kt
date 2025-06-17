@@ -1,6 +1,7 @@
 package com.examples.moviesapp.data.data_source
 
 import com.examples.moviesapp.data.api.KinoService
+import com.examples.moviesapp.data.models_dto.PersonDto
 import com.examples.moviesapp.data.models_dto.StaffDto
 import javax.inject.Inject
 
@@ -9,4 +10,6 @@ class StaffDataSource @Inject constructor(
 ) {
 
     suspend fun getCastList(filmId: Int): List<StaffDto> = kinoService.getCastList(filmId)
+
+    suspend fun getPerson(id: Int): PersonDto = kinoService.getPerson(id)
 }

@@ -1,6 +1,6 @@
 package com.examples.moviesapp.domain.use_cases
 
-import com.examples.moviesapp.data.Repository
+import com.examples.moviesapp.data.repositories.Repository
 import com.examples.moviesapp.domain.models.CollectionsModel
 import com.examples.moviesapp.utils.shuffleList
 import javax.inject.Inject

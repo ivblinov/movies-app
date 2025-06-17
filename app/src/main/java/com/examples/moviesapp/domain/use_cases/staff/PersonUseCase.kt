@@ -1,12 +1,11 @@
 package com.examples.moviesapp.domain.use_cases.staff
 
 import com.examples.moviesapp.data.repositories.StaffRepository
-import com.examples.moviesapp.domain.models.StaffModel
 import javax.inject.Inject
 
-class StaffUseCase @Inject constructor(
+class PersonUseCase @Inject constructor(
     private val repository: StaffRepository,
 ) {
 
-    suspend fun getCastList(filmId: Int): List<StaffModel> = repository.getCastList(filmId)
+    suspend fun getPerson(id: Int) = repository.getPerson(id)
 }

@@ -8,6 +8,17 @@
 
     <!--  core  -->
     <dimen name="size_0dp">0dp</dimen>
+    <dimen name="margin_start">26dp</dimen>
+    <dimen name="margin_end">26dp</dimen>
+    <dimen name="text_margin_start">16dp</dimen>
+
+    <!--  back button  -->
+    <dimen name="margin_top_back_button">8dp</dimen>
+    <dimen name="margin_start_back_button">18dp</dimen>
+    <dimen name="padding_start_back_button">8dp</dimen>
+    <dimen name="padding_top_back_button">8dp</dimen>
+    <dimen name="padding_end_back_button">8dp</dimen>
+    <dimen name="padding_bottom_back_button">8dp</dimen>
 
     <!--    margin-->
     <dimen name="margin_start_home_page">30dp</dimen>
@@ -27,6 +38,13 @@
     <!--  Action bar  -->
     <dimen name="action_bar_item_margin_start">6dp</dimen>
     <dimen name="action_bar_margin_bottom">18dp</dimen>
-    <dimen name="film_margin_start">26dp</dimen>
-    <dimen name="film_margin_end">26dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <!--  actor screen  -->
+    <dimen name="actor_photo_width">146dp</dimen>
+    <dimen name="actor_photo_height">201dp</dimen>
+    <dimen name="actor_photo_margin_top">8dp</dimen>
+    <dimen name="actor_profession_margin_top">3dp</dimen>
+    <dimen name="actor_best_margin_top">40dp</dimen>
+
 </resources>

@@ -1,8 +1,7 @@
 package com.examples.moviesapp.domain
 
-import com.examples.moviesapp.data.Repository
+import com.examples.moviesapp.data.repositories.Repository
 import com.examples.moviesapp.domain.models.MovieListModel
-import com.examples.moviesapp.entities.MovieList
 import com.examples.moviesapp.utils.getDaysList
 import com.examples.moviesapp.utils.getSetPairMonthYear
 import com.examples.moviesapp.utils.shuffleList

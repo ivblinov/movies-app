@@ -35,6 +35,11 @@ class MovieBlockTitleLayout @JvmOverloads constructor(
         typedArray.recycle()
     }
 
+    fun showAdditionalText() {
+        binding.additionalText.visibility = VISIBLE
+        binding.arrowRight.visibility = VISIBLE
+    }
+
     fun setMainText(text: String) {
         binding.mainText.text = text
     }
