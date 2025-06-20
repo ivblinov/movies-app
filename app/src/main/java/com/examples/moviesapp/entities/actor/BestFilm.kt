@@ -1,4 +1,6 @@
-package com.examples.moviesapp.entities
+package com.examples.moviesapp.entities.actor
+
+import com.examples.moviesapp.entities.Genre
 
 interface BestFilm {
     val kinopoiskId: Int?

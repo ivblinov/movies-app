@@ -1,5 +1,6 @@
 package com.examples.moviesapp.presentation.recyclers.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.MovieItemBinding
 import com.examples.moviesapp.entities.CollectionItem
-import javax.inject.Inject
 
-class CollectionsAdapter @Inject constructor() :
-    RecyclerView.Adapter<CollectionsAdapter.CollectionsViewHolder>() {
+class CollectionsAdapter(
+    private val onClick: (Int) -> Unit,
+) : RecyclerView.Adapter<CollectionsAdapter.CollectionsViewHolder>() {
 
     private val data: MutableList<CollectionItem> = ArrayList()
 
@@ -20,7 +21,8 @@ class CollectionsAdapter @Inject constructor() :
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onClick = onClick,
         )
     }
 
@@ -42,11 +44,22 @@ class CollectionsAdapter @Inject constructor() :
                     .into(poster)
             }
         }
+        item?.kinopoiskId?.let { holder.onBind(it) }
     }
 
-    inner class CollectionsViewHolder(val binding: MovieItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class CollectionsViewHolder(
+        val binding: MovieItemBinding,
+        private val onClick: (Int) -> Unit,
+    ) : RecyclerView.ViewHolder(binding.root) {
 
+        fun onBind(filmId: Int) {
+            binding.root.setOnClickListener {
+                onClick.invoke(filmId)
+            }
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<CollectionItem>) {
         this.data.addAll(data)
         notifyDataSetChanged()

@@ -43,16 +43,20 @@
         <item name="android:textColor">@color/gray_home_genre</item>
     </style>
 
-    <style name="PosterTextSecond">
+    <style name="PosterText">
         <item name="android:fontFamily">@font/graphik_regular</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/poster_text_second</item>
     </style>
 
-    <style name="FilmDescription">
+    <style name="FilmShortDescription">
         <item name="android:fontFamily">@font/graphik_semibold</item>
         <item name="android:textColor">@color/black_bottom_nav</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="FilmDescription" parent="FilmShortDescription">
+        <item name="android:fontFamily">@font/graphik_regular</item>
     </style>
 
     <style name="Title">

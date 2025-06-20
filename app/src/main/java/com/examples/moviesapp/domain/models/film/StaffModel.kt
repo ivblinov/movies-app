@@ -1,6 +1,6 @@
-package com.examples.moviesapp.domain.models
+package com.examples.moviesapp.domain.models.film
 
-import com.examples.moviesapp.entities.Staff
+import com.examples.moviesapp.entities.film.Staff
 
 data class StaffModel(
     override val staffId: Int?,

@@ -1,8 +1,8 @@
-package com.examples.moviesapp.data.mappers
+package com.examples.moviesapp.data.mappers.actor
 
 import com.examples.moviesapp.data.mappers.utils.MapperGenreModel
-import com.examples.moviesapp.data.models_dto.BestFilmDto
-import com.examples.moviesapp.domain.models.BestFilmModel
+import com.examples.moviesapp.data.models_dto.actor.BestFilmDto
+import com.examples.moviesapp.domain.models.actor.BestFilmModel
 import javax.inject.Inject
 
 class MapperBestFilm @Inject constructor(

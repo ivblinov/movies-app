@@ -24,6 +24,8 @@
     <!--  FILM  -->
     <string name="description_poster">poster</string>
     <string name="text_cast_of_the_film">В фильме снимались</string>
+    <string name="text_staff_of_the_film">Над фильмом работали</string>
+    <string name="gallery">Галерея</string>
 
     <!--  ACTOR  -->
     <string name="describe_icon_back_button">Icon back button</string>

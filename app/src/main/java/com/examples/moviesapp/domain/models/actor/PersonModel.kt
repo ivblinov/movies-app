@@ -1,6 +1,6 @@
-package com.examples.moviesapp.domain.models
+package com.examples.moviesapp.domain.models.actor
 
-import com.examples.moviesapp.entities.Person
+import com.examples.moviesapp.entities.actor.Person
 
 data class PersonModel(
     override val personId: Int?,

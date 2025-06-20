@@ -2,12 +2,11 @@ package com.examples.moviesapp.presentation.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.examples.moviesapp.domain.LoadPremiereListUseCase
+import com.examples.moviesapp.domain.models.MovieListModel
 import com.examples.moviesapp.domain.use_cases.LoadCollectionsUseCase
 import com.examples.moviesapp.domain.use_cases.LoadDynamicSelection2UseCase
 import com.examples.moviesapp.domain.use_cases.LoadDynamicSelectionUseCase
-import com.examples.moviesapp.domain.LoadPremiereListUseCase
-import com.examples.moviesapp.domain.models.MovieListModel
-import com.examples.moviesapp.domain.models.MovieModel
 import com.examples.moviesapp.entities.Collections
 import com.examples.moviesapp.entities.FilmListFull
 import com.examples.moviesapp.presentation.navigation.Navigator
@@ -141,7 +140,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun navigateToFilm(movie: MovieModel) {
-        navigator.navigateToFilm(movie)
+    fun navigateToFilm(filmId: Int) {
+        navigator.navigateToFilm(filmId)
     }
 }

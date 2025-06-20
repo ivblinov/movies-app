@@ -1,6 +1,6 @@
-package com.examples.moviesapp.domain.models
+package com.examples.moviesapp.domain.models.actor
 
-import com.examples.moviesapp.entities.BestFilm
+import com.examples.moviesapp.entities.actor.BestFilm
 import com.examples.moviesapp.entities.Genre
 
 data class BestFilmModel(

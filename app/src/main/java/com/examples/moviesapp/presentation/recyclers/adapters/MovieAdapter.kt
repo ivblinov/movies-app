@@ -1,18 +1,17 @@
 package com.examples.moviesapp.presentation.recyclers.adapters
 
-import android.util.Log
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.MovieItemBinding
 import com.examples.moviesapp.domain.models.MovieModel
-import com.examples.moviesapp.entities.Movie
 
 private const val TAG = "MyLog"
 
 class MovieAdapter(
-    private val onClick: (movie: MovieModel) -> Unit,
+    private val onClick: (Int) -> Unit,
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private val data: MutableList<MovieModel> = ArrayList()
@@ -47,16 +46,17 @@ class MovieAdapter(
 
     inner class MovieViewHolder(
         val binding: MovieItemBinding,
-        private val onClick: (movie: MovieModel) -> Unit,
+        private val onClick: (Int) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(movie: MovieModel) {
             binding.root.setOnClickListener {
-                onClick(movie)
+                onClick(movie.kinopoiskId)
             }
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<MovieModel>) {
         this.data.addAll(data)
         notifyDataSetChanged()

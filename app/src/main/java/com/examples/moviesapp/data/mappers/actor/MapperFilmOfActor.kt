@@ -1,7 +1,7 @@
-package com.examples.moviesapp.data.mappers.utils
+package com.examples.moviesapp.data.mappers.actor
 
-import com.examples.moviesapp.data.models_dto.FilmOfActorDto
-import com.examples.moviesapp.domain.models.FilmOfActorModel
+import com.examples.moviesapp.data.models_dto.actor.FilmOfActorDto
+import com.examples.moviesapp.domain.models.actor.FilmOfActorModel
 import javax.inject.Inject
 
 class MapperFilmOfActor @Inject constructor() {

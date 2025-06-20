@@ -1,11 +1,10 @@
 package com.examples.moviesapp.presentation.screens.actor
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.examples.moviesapp.domain.models.BestFilmModel
-import com.examples.moviesapp.domain.models.FilmOfActorModel
-import com.examples.moviesapp.domain.models.PersonModel
+import com.examples.moviesapp.domain.models.actor.BestFilmModel
+import com.examples.moviesapp.domain.models.actor.FilmOfActorModel
+import com.examples.moviesapp.domain.models.actor.PersonModel
 import com.examples.moviesapp.domain.use_cases.best_film.BestFilmUseCase
 import com.examples.moviesapp.domain.use_cases.staff.PersonUseCase
 import com.examples.moviesapp.presentation.states.State

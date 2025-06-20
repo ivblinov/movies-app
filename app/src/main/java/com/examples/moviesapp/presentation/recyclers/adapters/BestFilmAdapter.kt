@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.MovieItemBinding
-import com.examples.moviesapp.domain.models.BestFilmModel
+import com.examples.moviesapp.domain.models.actor.BestFilmModel
 
 class BestFilmAdapter(
     private var bestFilms: List<BestFilmModel> = listOf(),
