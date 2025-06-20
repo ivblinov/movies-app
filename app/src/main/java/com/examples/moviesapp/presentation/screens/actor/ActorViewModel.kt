@@ -7,6 +7,7 @@ import com.examples.moviesapp.domain.models.actor.FilmOfActorModel
 import com.examples.moviesapp.domain.models.actor.PersonModel
 import com.examples.moviesapp.domain.use_cases.best_film.BestFilmUseCase
 import com.examples.moviesapp.domain.use_cases.staff.PersonUseCase
+import com.examples.moviesapp.presentation.navigation.Navigator
 import com.examples.moviesapp.presentation.states.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,11 +15,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "MyLog"
-
 class ActorViewModel @Inject constructor(
     private val useCase: PersonUseCase,
     private val bestFilmUseCase: BestFilmUseCase,
+    private val navigator: Navigator,
 ) : ViewModel() {
 
     var actor: PersonModel? = null
@@ -30,13 +30,13 @@ class ActorViewModel @Inject constructor(
     private val _bestState = MutableStateFlow<State>(State.Success)
     val bestState = _bestState.asStateFlow()
 
-    fun getActor(id: Int) {
+    fun getActor(id: Int, professionKey: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = State.Loading
             actor = useCase.getPerson(id)
             _state.value = State.Success
 
-            val best10Films = getBestFilms(actor?.films)
+            val best10Films = getBestFilms(actor, professionKey)
             loadBestFilms(best10Films)
         }
     }
@@ -55,19 +55,18 @@ class ActorViewModel @Inject constructor(
         }
     }
 
-    private fun getBestFilms(films: List<FilmOfActorModel>?): List<FilmOfActorModel>? {
-        films?.let { films ->
+    fun navigateToBestFilm(filmId: Int) {
+        navigator.navigateToBestFilm(filmId)
+    }
+
+    private fun getBestFilms(actor: PersonModel?, professionKey: String): List<FilmOfActorModel>? {
+        actor?.films?.let { films ->
             val uniqueFilms = films.toSet().toList()
             val bestFilms = uniqueFilms
-                .filter { it.professionKey == ACTOR_KEY }
+                .filter { it.professionKey == professionKey }
                 .sortedBy { it.rating }.reversed()
             return if (bestFilms.size > 10) bestFilms.subList(0, 10) else bestFilms
         }
         return null
-    }
-
-    companion object {
-
-        private const val ACTOR_KEY = "ACTOR"
     }
 }

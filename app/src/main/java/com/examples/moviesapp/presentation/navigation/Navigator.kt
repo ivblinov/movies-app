@@ -39,10 +39,16 @@ class Navigator : MovieRouter {
         navController?.navigate(R.id.action_nav_home_to_filmFragment, FilmFragment.createBundle(filmId))
     }
 
-    override fun navigateToActor(actorId: Int) {
+    override fun navigateToBestFilm(filmId: Int) {
+        if (!canNavigate(R.id.actorFragment, R.id.filmFragment))
+            return
+        navController?.navigate(R.id.action_actorFragment_to_filmFragment, FilmFragment.createBundle(filmId))
+    }
+
+    override fun navigateToActor(actorId: Int, professionKey: String) {
         if (!canNavigate(R.id.filmFragment, R.id.actorFragment))
             return
-        navController?.navigate(R.id.action_filmFragment_to_actorFragment, ActorFragment.createBundle(actorId))
+        navController?.navigate(R.id.action_filmFragment_to_actorFragment, ActorFragment.createBundle(actorId, professionKey))
     }
 
     override fun clickButtonBack() {

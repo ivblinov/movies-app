@@ -8,5 +8,7 @@ interface MovieRouter {
 
     fun navigateToFilm(filmId: Int)
 
-    fun navigateToActor(actorId: Int)
+    fun navigateToBestFilm(filmId: Int)
+
+    fun navigateToActor(actorId: Int, professionKey: String)
 }

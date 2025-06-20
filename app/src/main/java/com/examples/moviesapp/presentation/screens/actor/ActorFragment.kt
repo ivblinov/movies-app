@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,15 +16,15 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.examples.moviesapp.databinding.FragmentActorBinding
-import com.examples.moviesapp.presentation.states.State
 import com.examples.moviesapp.R
+import com.examples.moviesapp.databinding.FragmentActorBinding
 import com.examples.moviesapp.presentation.recyclers.adapters.BestFilmAdapter
+import com.examples.moviesapp.presentation.states.State
 import com.examples.moviesapp.utils.appComponent
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "MyLog"
+const val ACTOR = "ACTOR"
 
 class ActorFragment : Fragment() {
 
@@ -33,6 +32,7 @@ class ActorFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var actorId: Int? = null
+    private var professionKey = ACTOR
 
     @Inject
     lateinit var viewModel: ActorViewModel
@@ -46,7 +46,8 @@ class ActorFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             actorId = it.getInt(ACTOR_ID_KEY)
-            actorId?.let { viewModel.getActor(it) }
+            professionKey = it.getString(PROFESSION_KEY, ACTOR)
+            actorId?.let { viewModel.getActor(it, professionKey) }
         }
     }
 
@@ -64,11 +65,7 @@ class ActorFragment : Fragment() {
         subscribe()
 
         binding.best.showAdditionalText()
-        binding.best.setAdapter(
-            BestFilmAdapter(
-                clickFilm = ::clickBestFilm,
-            )
-        )
+        binding.best.setAdapter(BestFilmAdapter(clickFilm = ::clickBestFilm))
 
         binding.photo.setOnClickListener {
             showPhotoDialog()
@@ -76,7 +73,7 @@ class ActorFragment : Fragment() {
     }
 
     private fun clickBestFilm(filmId: Int) {
-        Log.d(TAG, "clickBestFilm: id = $filmId")
+        viewModel.navigateToBestFilm(filmId)
     }
 
     private fun showPhotoDialog() {
@@ -150,8 +147,15 @@ class ActorFragment : Fragment() {
     }
 
     companion object {
-        fun createBundle(actorId: Int) = bundleOf(ACTOR_ID_KEY to actorId)
+
+        fun createBundle(actorId: Int, professionKey: String): Bundle {
+            val bundle = bundleOf()
+            bundle.putInt(ACTOR_ID_KEY, actorId)
+            bundle.putString(PROFESSION_KEY, professionKey)
+            return bundle
+        }
 
         private const val ACTOR_ID_KEY = "ACTOR_ID_KEY"
+        private const val PROFESSION_KEY = "PROFESSION_KEY"
     }
 }

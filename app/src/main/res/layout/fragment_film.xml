@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:contentDescription="@string/description_poster"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -105,6 +106,7 @@
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="40dp"
             android:lineSpacingMultiplier="1.15"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/poster"
@@ -116,13 +118,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginEnd="@dimen/margin_end"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="@dimen/margin_end"
             android:clickable="true"
-            android:lineSpacingMultiplier="1.15"
-            android:focusable="true"
-            android:maxLines="5"
             android:ellipsize="end"
+            android:focusable="true"
+            android:lineSpacingMultiplier="1.15"
+            android:maxLines="5"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shortDescription"
@@ -176,7 +179,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/actorRV"
             android:layout_width="match_parent"
-            android:layout_height="296dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -194,7 +197,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="32dp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -237,7 +240,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/staffRV"
             android:layout_width="match_parent"
-            android:layout_height="144dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -251,13 +254,13 @@
 
         <com.examples.moviesapp.presentation.custom_layouts.MovieBlockTitleLayout
             android:layout_width="match_parent"
-            app:main_text="@string/gallery"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/staffRV"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginTop="40dp"
-            android:layout_height="wrap_content" />
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/staffRV"
+            app:main_text="@string/gallery" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -21,16 +21,11 @@ class FilmRepository @Inject constructor(
     suspend fun getCastList(filmId: Int): List<StaffModel> =
         filmDataSource.getCastList(filmId).map {
             mapper.mapFromDto(it)
-        }.filter { it.professionKey == ACTOR_KEY }
+        }
 
     suspend fun getPerson(id: Int): PersonModel =
         personMapper.mapFromDto(filmDataSource.getPerson(id))
 
     suspend fun getFilmInfo(filmId: Int): FilmInfoModel =
         filmInfoMapper.mapFromDto(filmDataSource.getFilmInfo(filmId))
-
-    companion object {
-
-        private const val ACTOR_KEY = "ACTOR"
-    }
 }

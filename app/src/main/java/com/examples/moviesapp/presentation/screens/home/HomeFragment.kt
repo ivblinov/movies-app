@@ -1,5 +1,6 @@
 package com.examples.moviesapp.presentation.screens.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.examples.moviesapp.app.MovieApplication
 import com.examples.moviesapp.databinding.FragmentHomePageBinding
 import com.examples.moviesapp.presentation.recyclers.adapters.CollectionsAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.DynamicAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
 import com.examples.moviesapp.presentation.states.AllButtonState
 import com.examples.moviesapp.presentation.states.HomePageState
+import com.examples.moviesapp.utils.appComponent
 import com.examples.moviesapp.utils.setVisible
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-private const val TAG = "MyLog"
 
 class HomeFragment : Fragment() {
 
@@ -35,18 +34,34 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var dynamicAdapter2: DynamicAdapter
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        inject()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity?.applicationContext as MovieApplication).appComponent.inject(this)
         _binding = FragmentHomePageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun inject() {
+        requireContext().appComponent().inject(this)
+    }
+
+    private fun initView() {
         val movieAdapter = MovieAdapter(onClick = viewModel::navigateToFilm)
         val popularAdapter = CollectionsAdapter(onClick = viewModel::navigateToFilm)
         val top250Adapter = CollectionsAdapter(onClick = viewModel::navigateToFilm)
@@ -59,6 +74,10 @@ class HomeFragment : Fragment() {
         binding.dynamicSelectionBlock2.setAdapter(dynamicAdapter2)
         binding.tvSerialsBlock.setAdapter(tvSerialsAdapter)
 
+        subscribe()
+    }
+
+    private fun subscribe() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 launch {
@@ -66,11 +85,13 @@ class HomeFragment : Fragment() {
                         when (state) {
                             HomePageState.Success -> {
                                 viewModel.premiereList?.items?.let {
+                                    it.forEach { film ->
+                                    }
                                     binding.premieresBlock.getMovieAdapter().setData(it)
                                 }
                             }
-
-                            HomePageState.Loading -> {}
+                            HomePageState.Loading -> {
+                            }
                         }
                     }
                 }
@@ -79,7 +100,6 @@ class HomeFragment : Fragment() {
                         when (premiereState) {
                             AllButtonState.Visible ->
                                 setVisible(binding.premieresBlock.additionalText)
-
                             else -> {}
                         }
                     }
@@ -89,7 +109,9 @@ class HomeFragment : Fragment() {
                         when (state) {
                             HomePageState.Loading -> {}
                             HomePageState.Success -> {
-                                viewModel.popularFilms?.items?.let { popularAdapter.setData(it) }
+                                viewModel.popularFilms?.items?.let {
+                                    binding.popularBlock.getCollectionsAdapter().setData(it)
+                                }
                             }
                         }
                     }
@@ -99,7 +121,6 @@ class HomeFragment : Fragment() {
                         when (popularState) {
                             AllButtonState.Visible ->
                                 setVisible(binding.popularBlock.additionalText)
-
                             else -> {}
                         }
                     }
@@ -109,7 +130,9 @@ class HomeFragment : Fragment() {
                         when (state) {
                             HomePageState.Loading -> {}
                             HomePageState.Success -> {
-                                viewModel.top250Films?.items?.let { top250Adapter.setData(it) }
+                                viewModel.top250Films?.items?.let {
+                                    binding.top250Block.getCollectionsAdapter().setData(it)
+                                }
                             }
                         }
                     }
@@ -180,7 +203,7 @@ class HomeFragment : Fragment() {
                             HomePageState.Loading -> {}
                             HomePageState.Success -> {
                                 viewModel.tvSerialsList?.items?.let {
-                                    tvSerialsAdapter.setData(it)
+                                    binding.tvSerialsBlock.getCollectionsAdapter().setData(it)
                                 }
                             }
                         }
@@ -196,10 +219,5 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
