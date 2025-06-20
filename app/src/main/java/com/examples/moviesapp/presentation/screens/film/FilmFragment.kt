@@ -67,7 +67,7 @@ class FilmFragment : Fragment() {
             viewModel.getCastList(it)
         }
     }
-
+    
     private fun navigateToActor(actorId: Int, professionKey: String) {
         viewModel.navigateToActor(actorId, professionKey)
     }
