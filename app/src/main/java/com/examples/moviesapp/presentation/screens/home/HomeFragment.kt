@@ -30,19 +30,10 @@ class HomeFragment : Fragment() {
     lateinit var viewModel: HomeViewModel
 
     @Inject
-    lateinit var popularAdapter: CollectionsAdapter
-
-    @Inject
-    lateinit var top250Adapter: CollectionsAdapter
-
-    @Inject
     lateinit var dynamicAdapter: DynamicAdapter
 
     @Inject
     lateinit var dynamicAdapter2: DynamicAdapter
-
-    @Inject
-    lateinit var tvSerialsAdapter: CollectionsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +48,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val movieAdapter = MovieAdapter(onClick = viewModel::navigateToFilm)
+        val popularAdapter = CollectionsAdapter(onClick = viewModel::navigateToFilm)
+        val top250Adapter = CollectionsAdapter(onClick = viewModel::navigateToFilm)
+        val tvSerialsAdapter = CollectionsAdapter(onClick = viewModel::navigateToFilm)
 
         binding.premieresBlock.setAdapter(movieAdapter)
         binding.popularBlock.setAdapter(popularAdapter)

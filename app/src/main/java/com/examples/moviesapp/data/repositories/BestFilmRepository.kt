@@ -1,8 +1,8 @@
 package com.examples.moviesapp.data.repositories
 
 import com.examples.moviesapp.data.data_source.BestFilmDataSource
-import com.examples.moviesapp.data.mappers.MapperBestFilm
-import com.examples.moviesapp.domain.models.BestFilmModel
+import com.examples.moviesapp.data.mappers.actor.MapperBestFilm
+import com.examples.moviesapp.domain.models.actor.BestFilmModel
 import javax.inject.Inject
 
 class BestFilmRepository @Inject constructor(

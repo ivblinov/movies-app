@@ -66,7 +66,7 @@
 
         <TextView
             android:id="@+id/country"
-            style="@style/PosterTextSecond"
+            style="@style/PosterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -77,7 +77,7 @@
 
         <TextView
             android:id="@+id/year"
-            style="@style/PosterTextSecond"
+            style="@style/PosterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
@@ -87,7 +87,8 @@
             tools:text="2020, драма, приключения" />
 
         <TextView
-            style="@style/PosterTextSecond"
+            android:id="@+id/rating"
+            style="@style/PosterText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
@@ -97,17 +98,35 @@
             tools:text="6.4 Китобой" />
 
         <TextView
-            android:id="@+id/description"
-            style="@style/FilmDescription"
+            android:id="@+id/shortDescription"
+            style="@style/FilmShortDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="40dp"
+            android:lineSpacingMultiplier="1.15"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/poster"
             tools:text="Чукотский парень влюбляется в американскую вебкам-модель. Приз Венеции, Кристина Асмус в роли девушки мечты" />
 
+        <TextView
+            android:id="@+id/description"
+            style="@style/FilmDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginEnd="@dimen/margin_end"
+            android:layout_marginTop="32dp"
+            android:clickable="true"
+            android:lineSpacingMultiplier="1.15"
+            android:focusable="true"
+            android:maxLines="5"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shortDescription"
+            tools:text="Все меняется в жизни юного чукотского охотника Лёшки с появлением в поселке интернета. Он влюбляется — впервые и сильно — в молчаливую девушку" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/titleCastBlock"
@@ -158,16 +177,87 @@
             android:id="@+id/actorRV"
             android:layout_width="match_parent"
             android:layout_height="296dp"
-            android:clipToPadding="false"
-            android:paddingStart="@dimen/margin_start"
             android:layout_marginTop="32dp"
+            android:clipToPadding="false"
             android:orientation="horizontal"
+            android:paddingStart="@dimen/margin_start"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleCastBlock"
             app:spanCount="4"
             tools:listitem="@layout/item_person" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/titleStaffBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginTop="40dp"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/actorRV">
+
+            <TextView
+                android:id="@+id/titleStaff"
+                style="@style/Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_staff_of_the_film"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/numberPersons"
+                style="@style/ArrowRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iconNumberPersons"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="19" />
+
+            <ImageView
+                android:id="@+id/iconNumberPersons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="@dimen/margin_end"
+                android:src="@drawable/ic_arrow_right_18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/staffRV"
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:layout_marginTop="32dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/margin_start"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleStaffBlock"
+            app:spanCount="2"
+            tools:listitem="@layout/item_person" />
+
+        <com.examples.moviesapp.presentation.custom_layouts.MovieBlockTitleLayout
+            android:layout_width="match_parent"
+            app:main_text="@string/gallery"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/staffRV"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

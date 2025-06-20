@@ -1,6 +1,6 @@
-package com.examples.moviesapp.data.models_dto
+package com.examples.moviesapp.data.models_dto.film
 
-import com.examples.moviesapp.entities.Staff
+import com.examples.moviesapp.entities.film.Staff
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

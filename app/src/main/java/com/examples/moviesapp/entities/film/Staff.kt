@@ -1,4 +1,4 @@
-package com.examples.moviesapp.entities
+package com.examples.moviesapp.entities.film
 
 interface Staff {
     val staffId: Int?

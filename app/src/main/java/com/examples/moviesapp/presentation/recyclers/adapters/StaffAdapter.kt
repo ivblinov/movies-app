@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.examples.moviesapp.databinding.ItemPersonBinding
-import com.examples.moviesapp.entities.Staff
+import com.examples.moviesapp.entities.film.Staff
 import com.examples.moviesapp.presentation.screens.film.GRID_SIZE
 
 class StaffAdapter(

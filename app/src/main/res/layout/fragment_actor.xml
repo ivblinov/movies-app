@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/nameActor"
-            style="@style/FilmDescription"
+            style="@style/FilmShortDescription"
             android:layout_width="@dimen/size_0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/text_margin_start"
