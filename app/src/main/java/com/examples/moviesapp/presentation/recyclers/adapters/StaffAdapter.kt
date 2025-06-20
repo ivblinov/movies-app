@@ -10,16 +10,17 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.examples.moviesapp.databinding.ItemPersonBinding
 import com.examples.moviesapp.entities.film.Staff
+import com.examples.moviesapp.presentation.screens.actor.ACTOR
 import com.examples.moviesapp.presentation.screens.film.GRID_SIZE
 
 class StaffAdapter(
     private var staffList: List<Staff> = listOf(),
-    private val clickPerson: (Int) -> Unit,
+    private val clickPerson: (Int, String) -> Unit,
 ) : RecyclerView.Adapter<StaffAdapter.ViewHolder>() {
 
     class ViewHolder(
         val binding: ItemPersonBinding,
-        private val clickPerson: (Int) -> Unit,
+        private val clickPerson: (Int, String) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(person: Staff) {
@@ -32,11 +33,28 @@ class StaffAdapter(
 
             binding.actorName.text =
                 if (person.nameRu.isNullOrEmpty()) person.nameEn else person.nameRu
-            binding.characterName.text = person.description ?: ""
+            binding.characterName.text =
+                capitalizeFirstLetter(person.description) ?: getProfession(person.professionKey)
 
             binding.root.setOnClickListener {
-                person.staffId?.let { clickPerson.invoke(it) }
+                person.staffId?.let { clickPerson.invoke(it, person.professionKey ?: ACTOR) }
             }
+        }
+
+        fun capitalizeFirstLetter(text: String?): String? {
+            return text?.replaceFirstChar { it.titlecase() }
+        }
+
+        private fun getProfession(professionKey: String?): String = when (professionKey) {
+            "DIRECTOR" -> "Режиссёр"
+            "PRODUCER" -> "Продюсер"
+            "WRITER" -> "Сценарист"
+            "COMPOSER" -> "Композитор"
+            "OPERATOR" -> "Оператор"
+            "DESIGN" -> "Художник"
+            "EDITOR" -> "Монтажёр"
+            "VOICE_DIRECTOR" -> "Режиссёр дубляжа"
+            else -> ""
         }
 
         fun dpToPx(dp: Int): Int {

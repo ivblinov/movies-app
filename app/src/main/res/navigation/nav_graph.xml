@@ -37,5 +37,9 @@
         android:id="@+id/actorFragment"
         android:name="com.examples.moviesapp.presentation.screens.actor.ActorFragment"
         android:label="fragment_actor"
-        tools:layout="@layout/fragment_actor" />
+        tools:layout="@layout/fragment_actor" >
+        <action
+            android:id="@+id/action_actorFragment_to_filmFragment"
+            app:destination="@id/filmFragment" />
+    </fragment>
 </navigation>
