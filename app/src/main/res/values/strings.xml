@@ -33,10 +33,4 @@
     <string name="describe_dialog_full_screen_image">Full Screen Image</string>
     <string name="best">Лучшее</string>
 
-    <!--  ACTOR  -->
-    <string name="describe_icon_back_button">Icon back button</string>
-    <string name="describe_photo">Photo</string>
-    <string name="describe_dialog_full_screen_image">Full Screen Image</string>
-    <string name="best">Лучшее</string>
-
 </resources>

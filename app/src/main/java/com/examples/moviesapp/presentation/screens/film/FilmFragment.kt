@@ -70,10 +70,6 @@ class FilmFragment : Fragment() {
         viewModel.navigateToActor(actorId)
     }
 
-    private fun navigateToActor(actorId: Int) {
-        viewModel.navigateToActor(actorId)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
