@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.FragmentFilmBinding
 import com.examples.moviesapp.domain.models.film.FilmInfoModel
@@ -23,6 +24,7 @@ import javax.inject.Inject
 
 private const val TAG = "MyLog"
 const val GRID_SIZE = 20
+const val STAFF_GRID_SIZE = 6
 
 class FilmFragment : Fragment() {
 
@@ -59,6 +61,7 @@ class FilmFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.actorRV.adapter = StaffAdapter(clickPerson = ::navigateToActor)
+        binding.staffRV.adapter = StaffAdapter(clickPerson = ::navigateToActor)
         binding.galleryRV.adapter = ImageAdapter()
 
         subscribe()
@@ -70,8 +73,8 @@ class FilmFragment : Fragment() {
         }
     }
 
-    private fun navigateToActor(actorId: Int) {
-        viewModel.navigateToActor(actorId)
+    private fun navigateToActor(actorId: Int, professionKey: String) {
+        viewModel.navigateToActor(actorId, professionKey)
     }
 
     override fun onDestroyView() {
@@ -94,7 +97,27 @@ class FilmFragment : Fragment() {
                                 val numberActors = viewModel.actors.size
                                 binding.numberActors.text =
                                     if (numberActors > GRID_SIZE) numberActors.toString() else ""
-                                getStaffAdapter().updateList(viewModel.actors)
+                                getActorAdapter().updateList(viewModel.actors)
+                            }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.staffState.collect { state ->
+                        when (state) {
+                            State.Loading -> {}
+                            State.Success -> {
+                                val numberStaff = viewModel.staffList.size
+                                binding.numberPersons.text = when {
+                                    numberStaff > STAFF_GRID_SIZE -> numberStaff.toString()
+                                    numberStaff == 1 -> {
+                                        setSpanCount()
+                                        ""
+                                    }
+
+                                    else -> ""
+                                }
+                                getStaffAdapter().updateList(viewModel.staffList)
                             }
                         }
                     }
@@ -184,8 +207,16 @@ class FilmFragment : Fragment() {
             .joinToString(", ")
     }
 
-    private fun getStaffAdapter() = binding.actorRV.adapter as StaffAdapter
+    private fun setSpanCount() {
+        val layoutManager = getStaffLayoutManager()
+        layoutManager.spanCount = 1
+        binding.staffRV.layoutManager = layoutManager
+    }
+
+    private fun getActorAdapter() = binding.actorRV.adapter as StaffAdapter
+    private fun getStaffAdapter() = binding.staffRV.adapter as StaffAdapter
     private fun getImageAdapter() = binding.galleryRV.adapter as ImageAdapter
+    private fun getStaffLayoutManager() = binding.staffRV.layoutManager as GridLayoutManager
 
     companion object {
         fun createBundle(filmId: Int) = bundleOf(FILM_KEY to filmId)

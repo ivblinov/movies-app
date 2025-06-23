@@ -9,6 +9,7 @@ import com.examples.moviesapp.domain.use_cases.film.ImageUseCase
 import com.examples.moviesapp.domain.use_cases.staff.StaffUseCase
 import com.examples.moviesapp.entities.film.Staff
 import com.examples.moviesapp.presentation.navigation.Navigator
+import com.examples.moviesapp.presentation.screens.actor.ACTOR
 import com.examples.moviesapp.presentation.states.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "MyLog"
 class FilmViewModel @Inject constructor(
     private val staffUseCase: StaffUseCase,
     private val filmInfoUseCase: FilmInfoUseCase,
@@ -27,9 +27,13 @@ class FilmViewModel @Inject constructor(
     var filmInfo: FilmInfoModel? = null
     var actors: List<Staff> = listOf()
     var images: ImageModel? = null
+    var staffList: List<Staff> = listOf()
 
     private val _state = MutableStateFlow<State>(State.Success)
     val state = _state.asStateFlow()
+
+    private val _staffState = MutableStateFlow<State>(State.Success)
+    val staffState = _staffState.asStateFlow()
 
     private val _infoState = MutableStateFlow<State>(State.Success)
     val infoState = _infoState.asStateFlow()
@@ -48,8 +52,14 @@ class FilmViewModel @Inject constructor(
     fun getCastList(movieId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = State.Loading
-            actors = staffUseCase.getCastList(movieId)
+            _staffState.value = State.Loading
+
+            val allStaff = staffUseCase.getCastList(movieId)
+            actors = allStaff.filter { it.professionKey == ACTOR }
+            staffList = allStaff.filterNot { it.professionKey == ACTOR }
+
             _state.value = State.Success
+            _staffState.value = State.Success
         }
     }
 
@@ -61,7 +71,6 @@ class FilmViewModel @Inject constructor(
         }
     }
 
-    fun navigateToActor(actorId: Int) {
-        navigator.navigateToActor(actorId)
-    }
+    fun navigateToActor(actorId: Int, professionKey: String) {
+        navigator.navigateToActor(actorId, professionKey)
 }

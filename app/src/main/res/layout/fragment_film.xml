@@ -179,7 +179,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/actorRV"
             android:layout_width="match_parent"
-            android:layout_height="296dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -240,7 +240,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/staffRV"
             android:layout_width="match_parent"
-            android:layout_height="144dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -275,6 +275,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleGallery"
+            app:main_text="@string/gallery"
             tools:listitem="@layout/item_image" />
 
         <com.examples.moviesapp.presentation.custom_layouts.MovieBlockTitleLayout

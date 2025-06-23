@@ -20,9 +20,9 @@
         <item name="android:textColor">@color/black_bottom_nav</item>
     </style>
 
-    <style name="TextHomeTitle" parent="BaseTextStyle">
+    <style name="TextTitle" parent="BaseTextStyle">
         <item name="android:fontFamily">@font/graphik_semibold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
     </style>
 
     <style name="TextHomeAll" parent="BaseTextStyle">
