@@ -73,4 +73,5 @@ class FilmViewModel @Inject constructor(
 
     fun navigateToActor(actorId: Int, professionKey: String) {
         navigator.navigateToActor(actorId, professionKey)
+    }
 }
