@@ -11,6 +11,7 @@
     <dimen name="margin_start">26dp</dimen>
     <dimen name="margin_end">26dp</dimen>
     <dimen name="text_margin_start">16dp</dimen>
+    <dimen name="title_margin_top">40dp</dimen>
 
     <!--  back button  -->
     <dimen name="margin_top_back_button">8dp</dimen>
@@ -39,6 +40,10 @@
     <dimen name="action_bar_item_margin_start">6dp</dimen>
     <dimen name="action_bar_margin_bottom">18dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="gallery_margin_end">8dp</dimen>
+    <dimen name="gallery_image_width">192dp</dimen>
+    <dimen name="gallery_image_height">108dp</dimen>
+    <dimen name="gallery_images_margin_top">16dp</dimen>
 
     <!--  actor screen  -->
     <dimen name="actor_photo_width">146dp</dimen>

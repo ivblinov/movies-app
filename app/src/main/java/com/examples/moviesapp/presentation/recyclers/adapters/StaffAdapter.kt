@@ -1,7 +1,6 @@
 package com.examples.moviesapp.presentation.recyclers.adapters
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.examples.moviesapp.databinding.ItemPersonBinding
 import com.examples.moviesapp.entities.film.Staff
 import com.examples.moviesapp.presentation.screens.film.GRID_SIZE
+import com.examples.moviesapp.utils.dpToPx
 
 class StaffAdapter(
     private var staffList: List<Staff> = listOf(),
@@ -37,11 +37,6 @@ class StaffAdapter(
             binding.root.setOnClickListener {
                 person.staffId?.let { clickPerson.invoke(it) }
             }
-        }
-
-        fun dpToPx(dp: Int): Int {
-            val density = Resources.getSystem().displayMetrics.density
-            return (dp * density).toInt()
         }
     }
 

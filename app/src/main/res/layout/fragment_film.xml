@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:contentDescription="@string/description_poster"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -105,6 +106,7 @@
             android:layout_marginHorizontal="26dp"
             android:layout_marginTop="40dp"
             android:lineSpacingMultiplier="1.15"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/poster"
@@ -116,13 +118,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginEnd="@dimen/margin_end"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="@dimen/margin_end"
             android:clickable="true"
-            android:lineSpacingMultiplier="1.15"
-            android:focusable="true"
-            android:maxLines="5"
             android:ellipsize="end"
+            android:focusable="true"
+            android:lineSpacingMultiplier="1.15"
+            android:maxLines="5"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shortDescription"
@@ -133,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="@dimen/title_margin_top"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -194,7 +197,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="@dimen/title_margin_top"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -250,14 +253,39 @@
             tools:listitem="@layout/item_person" />
 
         <com.examples.moviesapp.presentation.custom_layouts.MovieBlockTitleLayout
+            android:id="@+id/titleGallery"
             android:layout_width="match_parent"
-            app:main_text="@string/gallery"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/staffRV"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_start"
-            android:layout_marginTop="40dp"
-            android:layout_height="wrap_content" />
+            android:layout_marginTop="@dimen/title_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/staffRV"
+            app:main_text="@string/gallery" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/galleryRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gallery_images_margin_top"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/margin_start"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleGallery"
+            tools:listitem="@layout/item_image" />
+
+        <com.examples.moviesapp.presentation.custom_layouts.MovieBlockTitleLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start"
+            android:layout_marginTop="@dimen/title_margin_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/galleryRV"
+            app:main_text="Похожие фильмы" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

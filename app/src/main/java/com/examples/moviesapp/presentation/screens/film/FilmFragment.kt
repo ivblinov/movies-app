@@ -2,6 +2,7 @@ package com.examples.moviesapp.presentation.screens.film
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.FragmentFilmBinding
 import com.examples.moviesapp.domain.models.film.FilmInfoModel
 import com.examples.moviesapp.presentation.recyclers.adapters.StaffAdapter
+import com.examples.moviesapp.presentation.screens.film.recycler.ImageAdapter
 import com.examples.moviesapp.presentation.states.State
 import com.examples.moviesapp.utils.appComponent
 import kotlinx.coroutines.launch
@@ -57,17 +59,15 @@ class FilmFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.actorRV.adapter = StaffAdapter(clickPerson = ::navigateToActor)
+        binding.galleryRV.adapter = ImageAdapter()
 
         subscribe()
 
         filmId?.let {
             viewModel.getFilmInfo(it)
             viewModel.getCastList(it)
+            viewModel.getImages(it)
         }
-    }
-
-    private fun navigateToActor(actorId: Int) {
-        viewModel.navigateToActor(actorId)
     }
 
     private fun navigateToActor(actorId: Int) {
@@ -106,6 +106,18 @@ class FilmFragment : Fragment() {
                             State.Success -> {
                                 viewModel.filmInfo?.let { filmInfo ->
                                     setFilmInfo(filmInfo)
+                                }
+                            }
+                        }
+                    }
+                }
+                launch {
+                    viewModel.imageState.collect { state ->
+                        when (state) {
+                            State.Loading -> {}
+                            State.Success -> {
+                                viewModel.images?.items?.let {
+                                    getImageAdapter().updateList(it)
                                 }
                             }
                         }
@@ -173,6 +185,7 @@ class FilmFragment : Fragment() {
     }
 
     private fun getStaffAdapter() = binding.actorRV.adapter as StaffAdapter
+    private fun getImageAdapter() = binding.galleryRV.adapter as ImageAdapter
 
     companion object {
         fun createBundle(filmId: Int) = bundleOf(FILM_KEY to filmId)

@@ -22,12 +22,12 @@
 
     <style name="TextHomeTitle" parent="BaseTextStyle">
         <item name="android:fontFamily">@font/graphik_semibold</item>
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextHomeAll" parent="BaseTextStyle">
         <item name="android:textColor">@color/blue_bottom_nav</item>
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="TextHomeImageViewTitle" parent="BaseTextStyle">

@@ -1,5 +1,6 @@
 package com.examples.moviesapp.utils
 
+import android.content.res.Resources
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.examples.moviesapp.domain.models.CollectionsModel
@@ -64,4 +65,9 @@ fun shuffleList(list: FilmListModel?): FilmListModel? {
         )
     }
     return newFilmListModel
+}
+
+fun dpToPx(dp: Int): Int {
+    val density = Resources.getSystem().displayMetrics.density
+    return (dp * density).toInt()
 }
