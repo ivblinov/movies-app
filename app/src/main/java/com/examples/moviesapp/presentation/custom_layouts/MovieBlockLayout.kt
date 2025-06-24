@@ -10,6 +10,7 @@ import com.examples.moviesapp.presentation.recyclers.adapters.BestFilmAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.CollectionsAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.DynamicAdapter
 import com.examples.moviesapp.presentation.recyclers.adapters.MovieAdapter
+import com.examples.moviesapp.presentation.screens.film.recycler.SimilarAdapter
 
 class MovieBlockLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -59,6 +60,10 @@ class MovieBlockLayout @JvmOverloads constructor(
         binding.recycler.adapter = adapter
     }
 
+    fun setAdapter(adapter: SimilarAdapter) {
+        binding.recycler.adapter = adapter
+    }
+
     fun getMovieAdapter(): MovieAdapter = binding.recycler.adapter as MovieAdapter
 
     fun getCollectionsAdapter(): CollectionsAdapter = binding.recycler.adapter as CollectionsAdapter
@@ -66,4 +71,6 @@ class MovieBlockLayout @JvmOverloads constructor(
     fun getDynamicAdapter(): DynamicAdapter = binding.recycler.adapter as DynamicAdapter
 
     fun getBestFilmAdapter(): BestFilmAdapter = binding.recycler.adapter as BestFilmAdapter
+
+    fun getSimilarAdapter(): SimilarAdapter = binding.recycler.adapter as SimilarAdapter
 }

@@ -4,10 +4,12 @@ import com.examples.moviesapp.data.data_source.FilmDataSource
 import com.examples.moviesapp.data.mappers.actor.MapperPerson
 import com.examples.moviesapp.data.mappers.film.MapperFilmInfo
 import com.examples.moviesapp.data.mappers.film.MapperImage
+import com.examples.moviesapp.data.mappers.film.MapperSimilarList
 import com.examples.moviesapp.data.mappers.film.MapperStaff
 import com.examples.moviesapp.domain.models.actor.PersonModel
 import com.examples.moviesapp.domain.models.film.FilmInfoModel
 import com.examples.moviesapp.domain.models.film.ImageModel
+import com.examples.moviesapp.domain.models.film.SimilarModelList
 import com.examples.moviesapp.domain.models.film.StaffModel
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,6 +21,7 @@ class FilmRepository @Inject constructor(
     private val personMapper: MapperPerson,
     private val filmInfoMapper: MapperFilmInfo,
     private val imageMapper: MapperImage,
+    private val similarMapper: MapperSimilarList,
 ) {
 
     suspend fun getCastList(filmId: Int): List<StaffModel> =
@@ -34,4 +37,7 @@ class FilmRepository @Inject constructor(
 
     suspend fun getImages(filmId: Int): ImageModel =
         imageMapper.mapFromDto(filmDataSource.getImages(filmId))
+
+    suspend fun getSimilarList(filmId: Int): SimilarModelList =
+        similarMapper.mapFromDto(filmDataSource.getSimilarList(filmId))
 }
