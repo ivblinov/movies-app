@@ -20,9 +20,9 @@ class Navigator : MovieRouter {
         }
     }
 
-    private fun canNavigate(startDestination: Int, endDestination: Int)
-            = navController?.currentDestination?.id == startDestination
-            && navController?.currentDestination?.id != endDestination
+    private fun canNavigate(startDestination: Int, endDestination: Int) =
+        navController?.currentDestination?.id == startDestination
+                && navController?.currentDestination?.id != endDestination
 
     override fun navigateToRoot(destinationId: Int) {
         navController?.let {
@@ -36,19 +36,32 @@ class Navigator : MovieRouter {
     override fun navigateToFilm(filmId: Int) {
         if (!canNavigate(R.id.nav_home, R.id.filmFragment))
             return
-        navController?.navigate(R.id.action_nav_home_to_filmFragment, FilmFragment.createBundle(filmId))
+        navController?.navigate(
+            R.id.action_nav_home_to_filmFragment,
+            FilmFragment.createBundle(filmId)
+        )
     }
 
     override fun navigateToBestFilm(filmId: Int) {
         if (!canNavigate(R.id.actorFragment, R.id.filmFragment))
             return
-        navController?.navigate(R.id.action_actorFragment_to_filmFragment, FilmFragment.createBundle(filmId))
+        navController?.navigate(
+            R.id.action_actorFragment_to_filmFragment,
+            FilmFragment.createBundle(filmId)
+        )
     }
 
     override fun navigateToActor(actorId: Int, professionKey: String) {
         if (!canNavigate(R.id.filmFragment, R.id.actorFragment))
             return
-        navController?.navigate(R.id.action_filmFragment_to_actorFragment, ActorFragment.createBundle(actorId, professionKey))
+        navController?.navigate(
+            R.id.action_filmFragment_to_actorFragment,
+            ActorFragment.createBundle(actorId, professionKey)
+        )
+    }
+
+    override fun navigateToSimilarFilm(filmId: Int) {
+        navController?.navigate(R.id.action_filmFragment_self, FilmFragment.createBundle(filmId))
     }
 
     override fun clickButtonBack() {

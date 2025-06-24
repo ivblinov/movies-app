@@ -16,4 +16,6 @@ class FilmDataSource @Inject constructor(
     suspend fun getFilmInfo(filmId: Int) = kinoService.getFilmInfo(filmId)
 
     suspend fun getImages(filmId: Int) = kinoService.getImages(filmId)
+
+    suspend fun getSimilarList(filmId: Int) = kinoService.getSimilarList(filmId)
 }

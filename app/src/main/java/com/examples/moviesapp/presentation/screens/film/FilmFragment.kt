@@ -2,27 +2,35 @@ package com.examples.moviesapp.presentation.screens.film
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.AutoTransition
+import androidx.transition.ChangeBounds
+import androidx.transition.Fade
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.FragmentFilmBinding
 import com.examples.moviesapp.domain.models.film.FilmInfoModel
 import com.examples.moviesapp.presentation.recyclers.adapters.StaffAdapter
 import com.examples.moviesapp.presentation.screens.film.recycler.ImageAdapter
+import com.examples.moviesapp.presentation.screens.film.recycler.SimilarAdapter
 import com.examples.moviesapp.presentation.states.State
 import com.examples.moviesapp.utils.appComponent
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "MyLog"
 const val GRID_SIZE = 20
 const val STAFF_GRID_SIZE = 6
 
@@ -63,6 +71,7 @@ class FilmFragment : Fragment() {
         binding.actorRV.adapter = StaffAdapter(clickPerson = ::navigateToActor)
         binding.staffRV.adapter = StaffAdapter(clickPerson = ::navigateToActor)
         binding.galleryRV.adapter = ImageAdapter()
+        binding.similarRV.setAdapter(SimilarAdapter(onClick = ::navigateToSimilarFilm))
 
         subscribe()
 
@@ -70,11 +79,8 @@ class FilmFragment : Fragment() {
             viewModel.getFilmInfo(it)
             viewModel.getCastList(it)
             viewModel.getImages(it)
+            viewModel.getSimilarList(it)
         }
-    }
-
-    private fun navigateToActor(actorId: Int, professionKey: String) {
-        viewModel.navigateToActor(actorId, professionKey)
     }
 
     override fun onDestroyView() {
@@ -146,8 +152,28 @@ class FilmFragment : Fragment() {
                         }
                     }
                 }
+                launch {
+                    viewModel.similarState.collect { state ->
+                        when (state) {
+                            State.Loading -> {}
+                            State.Success -> {
+                                viewModel.similarList?.items?.let {
+                                    getSimilarAdapter().updateList(it)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
+
+    private fun navigateToActor(actorId: Int, professionKey: String) {
+        viewModel.navigateToActor(actorId, professionKey)
+    }
+
+    private fun navigateToSimilarFilm(filmId: Int) {
+        viewModel.navigateToFilm(filmId)
     }
 
     private fun setFilmInfo(filmInfo: FilmInfoModel) {
@@ -160,22 +186,37 @@ class FilmFragment : Fragment() {
         binding.rating.text = ratingName
         binding.year.text = getYearGenre(filmInfo)
         binding.country.text = getCountryDuration(filmInfo)
-        filmInfo.shortDescription?.let { binding.shortDescription.text = it }
+
+        showOrHide(filmInfo.shortDescription, binding.shortDescription)
         filmInfo.description?.let { setDescription(it) }
+            ?: showOrHide(filmInfo.description, binding.description)
+    }
+
+    private fun showOrHide(text: String?, container: TextView) = with(container) {
+        if (text == null) visibility = View.GONE else this.text = text
     }
 
     fun setDescription(descriptionText: String) {
         with(binding.description) {
             if (descriptionText.length > maxSymbols) {
                 val shortText = descriptionText.take(maxSymbols) + "..."
-                binding.description.text = shortText
-                binding.description.setOnClickListener {
+                text = shortText
+                maxLines = 5
+
+                setOnClickListener {
                     isExpanded = !isExpanded
-                    binding.description.text = if (isExpanded) descriptionText else shortText
+                    TransitionManager.beginDelayedTransition(binding.root as ViewGroup)
+                    if (isExpanded) {
+                        maxLines = Integer.MAX_VALUE
+                        text = descriptionText
+                    } else {
+                        maxLines = 5
+                        text = shortText
+                    }
                 }
             } else {
-                binding.description.text = descriptionText
-                binding.description.setOnClickListener(null)
+                text = descriptionText
+                setOnClickListener(null)
             }
         }
     }
@@ -216,6 +257,7 @@ class FilmFragment : Fragment() {
     private fun getActorAdapter() = binding.actorRV.adapter as StaffAdapter
     private fun getStaffAdapter() = binding.staffRV.adapter as StaffAdapter
     private fun getImageAdapter() = binding.galleryRV.adapter as ImageAdapter
+    private fun getSimilarAdapter() = binding.similarRV.getSimilarAdapter()
     private fun getStaffLayoutManager() = binding.staffRV.layoutManager as GridLayoutManager
 
     companion object {

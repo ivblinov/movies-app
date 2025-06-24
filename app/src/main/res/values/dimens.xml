@@ -47,6 +47,10 @@
     <dimen name="item_person_photo_width">49dp</dimen>
     <dimen name="item_person_width">207dp</dimen>
     <dimen name="item_person_character_name_margin_top">2dp</dimen>
+    <dimen name="film_margin_from_title">32dp</dimen>
+    <dimen name="film_icon_arrow_margin_start">2dp</dimen>
+    <dimen name="film_icon_arrow_margin_top">3dp</dimen>
+    <dimen name="film_similar_margin_bottom">185dp</dimen>
 
     <!--  actor screen  -->
     <dimen name="actor_photo_width">146dp</dimen>

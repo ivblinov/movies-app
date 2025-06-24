@@ -120,7 +120,7 @@ class ActorFragment : Fragment() {
                                 Glide
                                     .with(requireContext())
                                     .load(viewModel.actor?.posterUrl)
-                                    .apply(RequestOptions().transform(RoundedCorners(dpToPx(4))))
+                                    .apply(RequestOptions().transform(RoundedCorners(dpToPx(6))))
                                     .into(binding.photo)
                             }
                         }
