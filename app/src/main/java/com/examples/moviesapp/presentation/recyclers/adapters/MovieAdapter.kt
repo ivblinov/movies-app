@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.examples.moviesapp.databinding.MovieItemBinding
 import com.examples.moviesapp.domain.models.MovieModel
 
-private const val TAG = "MyLog"
+private const val ITEM_COUNT_IN_LIST = 20
 
 class MovieAdapter(
     private val onClick: (Int) -> Unit,
@@ -27,7 +27,7 @@ class MovieAdapter(
         )
     }
 
-    override fun getItemCount(): Int = 20
+    override fun getItemCount(): Int = ITEM_COUNT_IN_LIST
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = data.getOrNull(position)

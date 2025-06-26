@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_filmFragment"
             app:destination="@id/filmFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_search"
@@ -43,6 +46,15 @@
         tools:layout="@layout/fragment_actor" >
         <action
             android:id="@+id/action_actorFragment_to_filmFragment"
+            app:destination="@id/filmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.examples.moviesapp.presentation.screens.list.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_filmFragment"
             app:destination="@id/filmFragment" />
     </fragment>
 </navigation>

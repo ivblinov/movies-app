@@ -13,4 +13,8 @@ interface MovieRouter {
     fun navigateToActor(actorId: Int, professionKey: String)
 
     fun navigateToSimilarFilm(filmId: Int)
+
+    fun navigateToListFilm()
+
+    fun navigateToFilmFromList(filmId: Int)
 }

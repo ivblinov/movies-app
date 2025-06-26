@@ -64,6 +64,21 @@ class Navigator : MovieRouter {
         navController?.navigate(R.id.action_filmFragment_self, FilmFragment.createBundle(filmId))
     }
 
+    override fun navigateToListFilm() {
+        if (!canNavigate(R.id.nav_home, R.id.listFragment))
+            return
+        navController?.navigate(R.id.action_nav_home_to_listFragment)
+    }
+
+    override fun navigateToFilmFromList(filmId: Int) {
+        if (!canNavigate(R.id.listFragment, R.id.filmFragment))
+            return
+        navController?.navigate(
+            R.id.action_listFragment_to_filmFragment,
+            FilmFragment.createBundle(filmId)
+        )
+    }
+
     override fun clickButtonBack() {
         navController?.popBackStack()
     }

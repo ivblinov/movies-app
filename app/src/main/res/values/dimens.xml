@@ -58,5 +58,8 @@
     <dimen name="actor_photo_margin_top">8dp</dimen>
     <dimen name="actor_profession_margin_top">3dp</dimen>
     <dimen name="actor_best_margin_top">40dp</dimen>
+    
+    <!--  list screen  -->
+    <dimen name="space_between_item">16dp</dimen>
 
 </resources>

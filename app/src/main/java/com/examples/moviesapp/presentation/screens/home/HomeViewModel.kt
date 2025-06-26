@@ -143,4 +143,8 @@ class HomeViewModel @Inject constructor(
     fun navigateToFilm(filmId: Int) {
         navigator.navigateToFilm(filmId)
     }
+
+    fun navigateToListFilm() {
+        navigator.navigateToListFilm()
+    }
 }
