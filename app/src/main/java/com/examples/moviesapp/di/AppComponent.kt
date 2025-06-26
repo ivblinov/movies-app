@@ -8,6 +8,7 @@ import com.examples.moviesapp.presentation.MainActivity
 import com.examples.moviesapp.presentation.screens.actor.ActorFragment
 import com.examples.moviesapp.presentation.screens.film.FilmFragment
 import com.examples.moviesapp.presentation.screens.home.HomeFragment
+import com.examples.moviesapp.presentation.screens.list.ListFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -38,4 +39,6 @@ interface AppComponent {
     fun inject(filmFragment: FilmFragment)
 
     fun inject(actorFragment: ActorFragment)
+
+    fun inject(listFragment: ListFragment)
 }

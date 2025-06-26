@@ -54,6 +54,10 @@
         <item name="android:textColor">@color/black_bottom_nav</item>
         <item name="android:textSize">16sp</item>
     </style>
+    
+    <style name="ListScreenTitle" parent="FilmShortDescription">
+        <item name="android:textSize">@dimen/text_size_character_name</item>
+    </style>
 
     <style name="FilmDescription" parent="FilmShortDescription">
         <item name="android:fontFamily">@font/graphik_regular</item>

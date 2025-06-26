@@ -34,10 +34,11 @@ class MovieBlockLayout @JvmOverloads constructor(
 
         binding.movieBlockTitle.mainText?.text = mainText
         binding.movieBlockTitle.additionalText?.text = additionalText
-        binding.movieBlockTitle.additionalText?.setOnClickListener {
-            binding.movieBlockTitle.additionalTextClicked?.invoke()
-        }
         typedArray.recycle()
+    }
+
+    fun setAllButtonListener(listener: () -> Unit) {
+        binding.movieBlockTitle.additionalTextClicked = listener
     }
 
     fun showAdditionalText() {

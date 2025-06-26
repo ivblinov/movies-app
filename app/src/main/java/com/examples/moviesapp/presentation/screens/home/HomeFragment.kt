@@ -2,6 +2,7 @@ package com.examples.moviesapp.presentation.screens.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.examples.moviesapp.utils.setVisible
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val TAG = "MyLog"
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomePageBinding? = null
@@ -85,8 +87,6 @@ class HomeFragment : Fragment() {
                         when (state) {
                             HomePageState.Success -> {
                                 viewModel.premiereList?.items?.let {
-                                    it.forEach { film ->
-                                    }
                                     binding.premieresBlock.getMovieAdapter().setData(it)
                                 }
                             }
@@ -98,8 +98,12 @@ class HomeFragment : Fragment() {
                 launch {
                     viewModel.allPremiereState.collect { premiereState ->
                         when (premiereState) {
-                            AllButtonState.Visible ->
+                            AllButtonState.Visible -> {
                                 setVisible(binding.premieresBlock.additionalText)
+                                binding.premieresBlock.setAllButtonListener {
+                                    viewModel.navigateToListFilm()
+                                }
+                            }
                             else -> {}
                         }
                     }
