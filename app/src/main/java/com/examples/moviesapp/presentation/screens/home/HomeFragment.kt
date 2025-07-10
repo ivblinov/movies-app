@@ -141,7 +141,6 @@ class HomeFragment : Fragment() {
                                     viewModel.navigateToListFilm()
                                 }
                             }
-
                             else -> {}
                         }
                     }
