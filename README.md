@@ -11,12 +11,19 @@
 
 * Отображение коллекций фильмов и сериалов;
 * Отображение детальной информации о выбранном фильме, сериале или актере;
+* На экране фильма есть Галерея с фото со съемок, постерами;
 * Сохранение понравившейся картины в избранное;
 * Поиск фильма по различным критериям.
 
 ### Скриншоты:
 
 <image src='app/src/main/assets/movie_home_screen.jpg' width=200></image>
+<image src='app/src/main/assets/main_forest.webp' width=200></image>
+<image src='app/src/main/assets/all.webp' width=200></image>
+<image src='app/src/main/assets/actor_screen.webp' width=200></image>
+<image src='app/src/main/assets/film_screen.webp' width=200></image>
+<image src='app/src/main/assets/gallery.webp' width=200></image>
+<image src='app/src/main/assets/actor_full_screen.webp' width=200></image>
 
 <br>
 

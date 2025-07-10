@@ -26,13 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
+        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         inject()
 
-        navController =
-            navHostFragment.navController
+        navController = navHostFragment.navController
 
         navController?.let {
             navigator.attachNavController(it, R.navigation.nav_graph)
