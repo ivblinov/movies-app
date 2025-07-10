@@ -17,7 +17,7 @@
 
 ### Скриншоты:
 
-<image src='app/src/main/assets/movie_home_screen.jpg' width=200></image>
+<image src='app/src/main/assets/main.webp' width=200></image>
 <image src='app/src/main/assets/main_forest.webp' width=200></image>
 <image src='app/src/main/assets/all.webp' width=200></image>
 <image src='app/src/main/assets/actor_screen.webp' width=200></image>
