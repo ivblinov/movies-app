@@ -32,6 +32,9 @@ class HomeViewModel @Inject constructor(
     var dynamicSelectionFilms2: FilmListFull? = null
     var tvSerialsList: Collections? = null
 
+    var premiereScrollPosition = 0
+    var premiereScrollOffset = 0
+
     private val _premiereState = MutableStateFlow<HomePageState>(HomePageState.Success)
     val premiereState = _premiereState.asStateFlow()
 

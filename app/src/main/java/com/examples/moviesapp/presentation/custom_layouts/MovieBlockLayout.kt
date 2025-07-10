@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.examples.moviesapp.R
 import com.examples.moviesapp.databinding.MovieBlockLayoutBinding
 import com.examples.moviesapp.presentation.recyclers.adapters.BestFilmAdapter
@@ -74,4 +76,7 @@ class MovieBlockLayout @JvmOverloads constructor(
     fun getBestFilmAdapter(): BestFilmAdapter = binding.recycler.adapter as BestFilmAdapter
 
     fun getSimilarAdapter(): SimilarAdapter = binding.recycler.adapter as SimilarAdapter
+
+    fun getLayoutManager() = binding.recycler.layoutManager as? LinearLayoutManager
+    fun getRecyclerView() = binding.recycler
 }

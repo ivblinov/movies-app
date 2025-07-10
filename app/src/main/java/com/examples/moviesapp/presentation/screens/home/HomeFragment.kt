@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val TAG = "MyLog"
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomePageBinding? = null
@@ -52,6 +55,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        setPaddingTitleSkillcinema()
     }
 
     override fun onDestroyView() {
@@ -64,7 +68,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView() {
-        val movieAdapter = MovieAdapter(onClick = viewModel::navigateToFilm)
+        val movieAdapter = MovieAdapter(
+            onClick = { filmId ->
+                val layoutManager = binding.premieresBlock.getLayoutManager()
+                val firstVisible = layoutManager?.findFirstVisibleItemPosition() ?: 0
+                val firstView = layoutManager?.findViewByPosition(firstVisible)
+                val recyclerView = binding.premieresBlock.getRecyclerView()
+                val offset = (firstView?.left ?: 0) - recyclerView.paddingStart
+
+                viewModel.premiereScrollPosition = firstVisible
+                viewModel.premiereScrollOffset = offset
+                viewModel.navigateToFilm(filmId)
+            }
+        )
         val popularAdapter = CollectionsAdapter(onClick = viewModel::navigateToFilm)
         val top250Adapter = CollectionsAdapter(onClick = viewModel::navigateToFilm)
         val tvSerialsAdapter = CollectionsAdapter(onClick = viewModel::navigateToFilm)
@@ -79,6 +95,19 @@ class HomeFragment : Fragment() {
         subscribe()
     }
 
+    private fun setPaddingTitleSkillcinema() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.titleSkillcinema) { view, insets ->
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(
+                0,
+                systemBarsInsets.top,
+                0,
+                0
+            )
+            insets
+        }
+    }
+
     private fun subscribe() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
@@ -88,8 +117,16 @@ class HomeFragment : Fragment() {
                             HomePageState.Success -> {
                                 viewModel.premiereList?.items?.let {
                                     binding.premieresBlock.getMovieAdapter().setData(it)
+                                    binding.premieresBlock.getRecyclerView().post {
+                                        binding.premieresBlock.getLayoutManager()
+                                            ?.scrollToPositionWithOffset(
+                                                viewModel.premiereScrollPosition,
+                                                viewModel.premiereScrollOffset
+                                            )
+                                    }
                                 }
                             }
+
                             HomePageState.Loading -> {
                             }
                         }
@@ -104,6 +141,7 @@ class HomeFragment : Fragment() {
                                     viewModel.navigateToListFilm()
                                 }
                             }
+
                             else -> {}
                         }
                     }
@@ -125,6 +163,7 @@ class HomeFragment : Fragment() {
                         when (popularState) {
                             AllButtonState.Visible ->
                                 setVisible(binding.popularBlock.additionalText)
+
                             else -> {}
                         }
                     }
